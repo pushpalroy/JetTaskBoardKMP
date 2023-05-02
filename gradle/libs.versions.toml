@@ -1,0 +1,54 @@
+[versions]
+
+kotlin = "1.8.20"
+agp = "7.4.2"
+compose = "1.4.0"
+androidx-appcompat = "1.6.1"
+androidx-activityCompose = "1.7.0"
+compose-uitooling = "1.4.1"
+kotlinx-coroutines = "1.6.4"
+kotlinx-serialization = "1.5.0"
+kotlinx-datetime = "0.4.0"
+koin = "3.4.0"
+ktor = "2.3.0"
+coil = "2.3.0"
+decompose = "2.0.0-alpha-02"
+essenty = "1.1.0"
+decompose-compose-experimental = "2.0.0-compose-experimental-alpha-02"
+
+[libraries]
+
+androidx-appcompat = {  module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
+compose-ui-util = { module = "org.jetbrains.compose.ui:ui-util", version.ref = "compose" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin_android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose-compose-experimental" }
+decompose-compose-multiplatform = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose-compose-experimental" }
+decompose_extensions = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose-compose-experimental" }
+essenty_parcelable = {module = "com.arkivanov.essenty:parcelable", version.ref = "essenty"}
+
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+[plugins]
+
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

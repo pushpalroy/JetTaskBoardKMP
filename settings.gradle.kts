@@ -1,4 +1,4 @@
-rootProject.name = "My application"
+rootProject.name = "JetTaskBoardKMM"
 
 include(":androidApp")
 include(":shared")
