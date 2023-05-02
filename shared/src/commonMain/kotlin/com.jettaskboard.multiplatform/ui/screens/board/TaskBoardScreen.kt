@@ -122,13 +122,12 @@ fun TaskBoardRoute(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.matchParentSize(),
                     loadingPlaceholder = {
-                        // todo - unable to load image in iOS
-//                        Image(
-//                            painter = painterResource("bg_board.jpg"),
-//                            contentScale = ContentScale.Crop,
-//                            contentDescription = "Board background",
-//                            modifier = Modifier.matchParentSize()
-//                        )
+                        Image(
+                            painter = painterResource("bg_board.jpg"),
+                            contentScale = ContentScale.Crop,
+                            contentDescription = "Board background",
+                            modifier = Modifier.matchParentSize()
+                        )
                     }
                 )
 
