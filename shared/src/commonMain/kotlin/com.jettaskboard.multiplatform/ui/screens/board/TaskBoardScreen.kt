@@ -3,6 +3,7 @@ package com.jettaskboard.multiplatform.ui.screens.board
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -116,14 +117,18 @@ fun TaskBoardRoute(
                 contentAlignment = Alignment.TopEnd
             ) {
                 AsyncImage(
-                    imageUrl = viewModel.latestBackgroundImgUri,
-                    loadingPlaceholder = {
-                        //painterResource("bg_board.jpg")
-                    },
-                    contentDescription = null,
+                    imageUrl = "https://images.unsplash.com/photo-1523895665936-7bfe172b757d",
+                    contentDescription = "Board background",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .matchParentSize()
+                    modifier = Modifier.matchParentSize(),
+                    loadingPlaceholder = {
+                        Image(
+                            painter = painterResource("bg_board.jpg"),
+                            contentScale = ContentScale.Crop,
+                            contentDescription = "Board background",
+                            modifier = Modifier.matchParentSize()
+                        )
+                    }
                 )
 
                 Zoomable(
@@ -166,6 +171,7 @@ fun TaskBoardRoute(
                                         }
                                     )
                                 }
+
                                 ExpandedBoardDrawerState.CHANGE_BACKGROUND_SCREEN_STATE -> {
 //                                    ChangeBoardBackgroundRoute(
 //                                        onBackClick = {
@@ -175,12 +181,15 @@ fun TaskBoardRoute(
 //                                        }
 //                                    )
                                 }
+
                                 ExpandedBoardDrawerState.FILTER_SCREEN_STATE -> {
                                     // Do Nothing
                                 }
+
                                 ExpandedBoardDrawerState.AUTOMATION_SCREEN_STATE -> {
                                     // Do Nothing
                                 }
+
                                 ExpandedBoardDrawerState.POWER_UP_SCREEN_STATE -> {
                                     // Do Nothing
                                 }
