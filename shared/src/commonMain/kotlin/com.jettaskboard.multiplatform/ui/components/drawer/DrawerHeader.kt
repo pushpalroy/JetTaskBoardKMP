@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,7 +50,7 @@ fun DrawerHeader(
                 .padding(16.dp)
         ) {
             Spacer(modifier = Modifier.height(8.dp))
-            Box(modifier = Modifier.size(52.dp).clip(CircleShape))
+            Box(modifier = Modifier.size(52.dp).clip(CircleShape).background(Color.LightGray))
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "Trello Org",
