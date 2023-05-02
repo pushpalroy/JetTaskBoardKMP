@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.compose
 
 plugins {
@@ -15,6 +16,14 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    jvm("desktop") {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
+
     cocoapods {
         version = "1.0.0"
         summary = "Some description for the Shared Module"
@@ -25,7 +34,8 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
+        extraSpecAttributes["resources"] =
+            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
@@ -76,6 +86,13 @@ kotlin {
                 implementation(libs.ktor.client.darwin)
             }
         }
+
+        val desktopMain by getting {
+            dependencies {
+                implementation(compose.desktop.common)
+                implementation(compose.desktop.currentOs)
+            }
+        }
     }
 }
 
@@ -98,5 +115,17 @@ android {
     }
     kotlin {
         jvmToolchain(11)
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "com.jettaskboard.multiplatform.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "com.jettaskboard.mutiplatform"
+            packageVersion = "1.0.0"
+        }
     }
 }
