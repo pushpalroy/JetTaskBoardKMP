@@ -14,7 +14,9 @@ import com.jettaskboard.multiplatform.util.krouter.RoutedContent
 import com.jettaskboard.multiplatform.util.krouter.rememberRouter
 
 @Composable
-fun RootComponent() {
+fun RootComponent(
+    isExpandedScreen: Boolean = false
+) {
 
     val router = rememberRouter(RootStateModel::class, listOf(RootStateModel.Dashboard))
 
@@ -25,11 +27,13 @@ fun RootComponent() {
             content = { screen ->
                 when (screen) {
                     is RootStateModel.Dashboard -> DashboardRoute(
+                        isExpandedScreen = isExpandedScreen,
                         navigateToTaskBoard = {
                             router.push(RootStateModel.TaskBoard)
                         }
                     )
                     is RootStateModel.TaskBoard -> TaskBoardRoute(
+                        isExpandedScreen = isExpandedScreen,
                         onBackClick = {
                             router.pop()
                         }

@@ -22,7 +22,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
     ) {
         CompositionLocalProvider(LocalComponentContext provides rootComponentContext) {
-            App()
+            App(isExpandedScreen = true)
         }
     }
 }

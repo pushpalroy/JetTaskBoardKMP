@@ -39,6 +39,7 @@ import com.jettaskboard.multiplatform.ui.components.multifab.FabOption
 import com.jettaskboard.multiplatform.ui.components.multifab.MultiFabItem
 import com.jettaskboard.multiplatform.ui.components.multifab.MultiFloatingActionButton
 import com.jettaskboard.multiplatform.ui.screens.dashboard.content.DashboardSinglePaneContent
+import com.jettaskboard.multiplatform.ui.screens.dashboard.content.DashboardTwoPaneContent
 import com.jettaskboard.multiplatform.ui.screens.dashboard.drawer.JtbDrawer
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
 import kotlinx.coroutines.launch
@@ -159,11 +160,11 @@ fun AdaptiveDashboardContent(
             navigateToTaskBoard = navigateToTaskBoard
         )
     } else {
-//        DashboardTwoPaneContent(
-//            paddingValues = contentPadding,
-//            viewModel = viewModel,
-//            navigateToTaskBoard = navigateToTaskBoard
-//        )
+        DashboardTwoPaneContent(
+            paddingValues = contentPadding,
+            viewModel = viewModel,
+            navigateToTaskBoard = navigateToTaskBoard
+        )
     }
 }
 

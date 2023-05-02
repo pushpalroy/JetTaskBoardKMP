@@ -1,6 +1,7 @@
 package com.jettaskboard.multiplatform.ui.components.dashboard
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,10 +35,10 @@ fun WorkspaceItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            modifier = Modifier.size(42.dp).clip(RoundedCornerShape(5)),
+            modifier = Modifier.size(42.dp).fillMaxWidth().clip(RoundedCornerShape(5)),
             imageUrl = imageUrl,
             contentDescription = null,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.FillWidth
         )
 
         Text(
