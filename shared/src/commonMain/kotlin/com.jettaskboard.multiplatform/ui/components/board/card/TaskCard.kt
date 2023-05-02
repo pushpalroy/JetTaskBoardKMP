@@ -1,4 +1,4 @@
-package com.jettaskboard.multiplatform.ui.components.board
+package com.jettaskboard.multiplatform.ui.components.board.card
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

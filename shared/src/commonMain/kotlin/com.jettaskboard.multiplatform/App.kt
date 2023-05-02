@@ -1,13 +1,13 @@
 package com.jettaskboard.multiplatform
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.jettaskboard.multiplatform.ui.screens.board.TaskBoardRoute
+import com.jettaskboard.multiplatform.ui.RootComponent
+import com.jettaskboard.multiplatform.ui.theme.JtbTheme
 
 @Composable
 fun App() {
-    MaterialTheme {
-        TaskBoardRoute()
+    JtbTheme(darkTheme = true) {
+        RootComponent()
     }
 }
 

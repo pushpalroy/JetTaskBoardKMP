@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jettaskboard.multiplatform.domain.model.ListModel
+import com.jettaskboard.multiplatform.ui.components.board.card.TaskCard
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DragAndDropState
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DragAndDropSurface
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DragSurface
