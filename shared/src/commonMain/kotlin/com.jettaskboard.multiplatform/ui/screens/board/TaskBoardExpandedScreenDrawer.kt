@@ -20,7 +20,6 @@ fun TaskBoardExpandedScreenDrawer(
         modifier = Modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // Change Background Item
         TaskBoardExpandedScreenDrawerItem(
             title = "Change Background",
             icon = painterResource("ic_baseline_wallpaper_24.xml"),

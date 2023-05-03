@@ -13,7 +13,7 @@ class PhotoDataSourceImpl(
     private val client: HttpClient
 ) : PhotoDataSource {
 
-    override suspend fun getRandomPhotoList(collectionId: Int): NetworkResponse<ResultImageDataModel> {
+    override suspend fun getRandomPhotoList(collectionId: Int): NetworkResponse<List<ResultImageDataModel>> {
         return safeApiCallHandler {
             client
                 .get {

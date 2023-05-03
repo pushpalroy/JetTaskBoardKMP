@@ -10,10 +10,12 @@ class PhotoRepoImpl(
     private val photoDataSource: PhotoDataSource
 ) : PhotoRepo {
 
-    override suspend fun getRandomPhotoList(collectionId: Int): NetworkResponse<ChangeBackgroundPhotoModel?> {
+    override suspend fun getRandomPhotoList(collectionId: Int): NetworkResponse<List<ChangeBackgroundPhotoModel>?> {
         return when (val result = photoDataSource.getRandomPhotoList(collectionId)) {
             is NetworkResponse.Success -> NetworkResponse.Success(
-                data = result.data.toDomain()
+                data = result.data.map { responseModel ->
+                    responseModel.toDomain()
+                }
             )
 
             is NetworkResponse.Failure -> NetworkResponse.Failure(Exception(result.throwable))

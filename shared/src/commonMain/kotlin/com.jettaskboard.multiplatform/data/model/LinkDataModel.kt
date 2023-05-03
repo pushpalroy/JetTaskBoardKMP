@@ -8,9 +8,5 @@ data class LinkDataModel(
     @SerialName("self")
     val self: String? = null,
     @SerialName("html")
-    val html: String? = null,
-    @SerialName("download")
-    val download: String? = null,
-    @SerialName("download_location")
-    val downloadLocation: String? = null
+    val html: String? = null
 )

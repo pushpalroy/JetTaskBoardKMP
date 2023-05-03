@@ -80,6 +80,7 @@ kotlin {
                 api(libs.kotlinx.coroutines.android)
                 api(libs.koin.android)
                 api(libs.coil.compose)
+                implementation(libs.ktor.client.okhttp)
             }
         }
 

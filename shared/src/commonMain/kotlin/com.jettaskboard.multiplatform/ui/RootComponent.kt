@@ -8,6 +8,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.jettaskboard.multiplatform.ui.screens.board.TaskBoardRoute
+import com.jettaskboard.multiplatform.ui.screens.board.changeBg.ChangeBoardBackgroundRoute
 import com.jettaskboard.multiplatform.ui.screens.dashboard.DashboardRoute
 import com.jettaskboard.multiplatform.ui.theme.JtbTheme
 import com.jettaskboard.multiplatform.util.krouter.RoutedContent
@@ -35,12 +36,16 @@ fun RootComponent(
 
                     is RootStateModel.TaskBoard -> TaskBoardRoute(
                         isExpandedScreen = isExpandedScreen,
-                        navigateToChangeBackgroundScreen = {},
-                        onBackClick = {
-                            router.pop()
-                        }
+                        navigateToChangeBgScreen = {
+                            router.push(RootStateModel.ChangeBackground)
+                        },
+                        onBackClick = { router.pop() }
                     )
-                    else -> {}
+
+                    is RootStateModel.ChangeBackground -> ChangeBoardBackgroundRoute(
+                        onImageSelected = { router.pop() },
+                        onBackClick = { router.pop() }
+                    )
                 }
             }
         )
@@ -51,4 +56,5 @@ fun RootComponent(
 sealed class RootStateModel : Parcelable {
     object Dashboard : RootStateModel()
     object TaskBoard : RootStateModel()
+    object ChangeBackground : RootStateModel()
 }

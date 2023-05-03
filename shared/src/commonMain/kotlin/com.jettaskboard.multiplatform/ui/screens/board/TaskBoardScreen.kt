@@ -3,7 +3,6 @@ package com.jettaskboard.multiplatform.ui.screens.board
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -57,18 +56,16 @@ fun TaskBoardRoute(
     onBackClick: () -> Unit = {},
     isExpandedScreen: Boolean = false,
     navigateToCreateCard: (String) -> Unit = {},
-    navigateToChangeBackgroundScreen: (String) -> Unit = {},
+    navigateToChangeBgScreen: (String) -> Unit = {},
     backgroundColor: Color = MaterialTheme.colors.surface
 ) {
     val viewModel = rememberViewModel(TaskBoardViewModel::class) { TaskBoardViewModel() }
     val boardBackground by viewModel.boardBackground.collectAsState(initial = "https://images.unsplash.com/photo-1523895665936-7bfe172b757d")
     val expandedScreenState = viewModel.drawerScreenState.value
+    var expandedPanel by remember { mutableStateOf(false) }
     val scaffoldState = rememberScaffoldState()
     val zoomableState = rememberZoomableState()
     val coroutineScope = rememberCoroutineScope()
-    var expandedPanel by remember {
-        mutableStateOf(false)
-    }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -77,8 +74,8 @@ fun TaskBoardRoute(
                 isExpandedScreen = isExpandedScreen,
                 onBackClick = onBackClick,
                 title = viewModel.boardInfo.value.second,
-                navigateToChangeBackgroundScreen = { passedString ->
-                    navigateToChangeBackgroundScreen(passedString)
+                navigateToChangeBgScreen = { passedString ->
+                    navigateToChangeBgScreen(passedString)
                 },
                 onHamBurgerIconClicked = {
                     expandedPanel = !expandedPanel
@@ -127,14 +124,7 @@ fun TaskBoardRoute(
                     contentDescription = "Board background",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.matchParentSize(),
-                    loadingPlaceholder = {
-                        Image(
-                            painter = painterResource("bg_board.jpg"),
-                            contentScale = ContentScale.Crop,
-                            contentDescription = "Board background",
-                            modifier = Modifier.matchParentSize()
-                        )
-                    }
+                    loadingPlaceholder = {}
                 )
 
                 Zoomable(
@@ -207,7 +197,7 @@ fun TopAppBar(
     isExpandedScreen: Boolean = false,
     onBackClick: () -> Unit,
     title: String,
-    navigateToChangeBackgroundScreen: (String) -> Unit,
+    navigateToChangeBgScreen: (String) -> Unit,
     onHamBurgerIconClicked: () -> Unit = {}
 ) {
     var displayTaskBoardToolbarMenuState by remember {
@@ -253,7 +243,7 @@ fun TopAppBar(
                     onDismissRequest = { displayTaskBoardToolbarMenuState = false },
                 ) {
                     JDropdownMenuItem(
-                        onSelect = { navigateToChangeBackgroundScreen("") }
+                        onSelect = { navigateToChangeBgScreen("") }
                     ) {
                         Icon(
                             painter = painterResource("ic_baseline_wallpaper_24.xml"),
@@ -268,7 +258,7 @@ fun TopAppBar(
                     }
 
                     JDropdownMenuItem(
-                        onSelect = { navigateToChangeBackgroundScreen("") }
+                        onSelect = { navigateToChangeBgScreen("") }
                     ) {
                         Icon(
                             painter = painterResource("ic_baseline_filter_list_24.xml"),
@@ -283,7 +273,7 @@ fun TopAppBar(
                     }
 
                     JDropdownMenuItem(
-                        onSelect = { navigateToChangeBackgroundScreen("") }
+                        onSelect = { navigateToChangeBgScreen("") }
                     ) {
                         Icon(
                             painter = painterResource("ic_baseline_automation_icon.xml"),

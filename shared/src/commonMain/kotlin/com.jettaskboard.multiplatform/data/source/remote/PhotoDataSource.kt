@@ -6,7 +6,7 @@ import com.jettaskboard.multiplatform.data.util.NetworkResponse
 
 interface PhotoDataSource {
 
-    suspend fun getRandomPhotoList(collectionId: Int): NetworkResponse<ResultImageDataModel>
+    suspend fun getRandomPhotoList(collectionId: Int): NetworkResponse<List<ResultImageDataModel>>
 
     suspend fun getSearchPhotoList(query: String): NetworkResponse<SearchPhotosDataModel>
 

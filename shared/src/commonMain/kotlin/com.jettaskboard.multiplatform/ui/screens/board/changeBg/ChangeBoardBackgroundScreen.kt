@@ -88,7 +88,8 @@ fun ChangeBoardBackgroundRoute(
                         viewModel.changeScreenState(selectedScreenState)
                     }
                 }
-                ChangeBackgroundScreenState.PHOTO_SCREEN, ChangeBackgroundScreenState.COLORS_SCREEN -> {
+                ChangeBackgroundScreenState.PHOTO_SCREEN,
+                ChangeBackgroundScreenState.COLORS_SCREEN -> {
                     Column(modifier = Modifier) {
                         SearchComponent(
                             textState = textSearch.orEmpty()
