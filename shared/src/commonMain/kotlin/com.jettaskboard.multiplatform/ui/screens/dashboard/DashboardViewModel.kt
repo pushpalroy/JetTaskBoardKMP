@@ -2,7 +2,7 @@ package com.jettaskboard.multiplatform.ui.screens.dashboard
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import com.jettaskboard.multiplatform.data.util.BoardList
+import com.jettaskboard.multiplatform.data.fakes.BoardList
 import com.jettaskboard.multiplatform.domain.model.Board
 import com.jettaskboard.multiplatform.domain.model.BoardListModel
 import com.jettaskboard.multiplatform.util.Result

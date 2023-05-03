@@ -32,8 +32,10 @@ fun RootComponent(
                             router.push(RootStateModel.TaskBoard)
                         }
                     )
+
                     is RootStateModel.TaskBoard -> TaskBoardRoute(
                         isExpandedScreen = isExpandedScreen,
+                        navigateToChangeBackgroundScreen = {},
                         onBackClick = {
                             router.pop()
                         }
@@ -49,5 +51,4 @@ fun RootComponent(
 sealed class RootStateModel : Parcelable {
     object Dashboard : RootStateModel()
     object TaskBoard : RootStateModel()
-    data class NoteDetails(val noteId: Long?) : RootStateModel()
 }

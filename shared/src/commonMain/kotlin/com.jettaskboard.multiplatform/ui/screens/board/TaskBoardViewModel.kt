@@ -5,16 +5,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.jettaskboard.multiplatform.data.util.Board
+import com.jettaskboard.multiplatform.data.fakes.Board
+import com.jettaskboard.multiplatform.data.source.local.preferences.UserPreferences
 import com.jettaskboard.multiplatform.domain.model.BoardModel
 import com.jettaskboard.multiplatform.domain.model.CardModel
 import com.jettaskboard.multiplatform.domain.model.ListModel
+import com.jettaskboard.multiplatform.util.Result
 import com.jettaskboard.multiplatform.util.krouter.ViewModel
+import com.jettaskboard.multiplatform.util.successOr
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import com.jettaskboard.multiplatform.util.Result
-import com.jettaskboard.multiplatform.util.successOr
+import org.koin.core.component.inject
 
 class TaskBoardViewModel : ViewModel() {
 
@@ -38,73 +40,69 @@ class TaskBoardViewModel : ViewModel() {
      * used to run recomposition whenever the new card is added.
      */
     var totalCards by mutableStateOf(0)
-    var latestBackgroundImgUri by mutableStateOf("")
 
     private var _drawerScreenState = mutableStateOf(ExpandedBoardDrawerState.DRAWER_SCREEN_STATE)
     val drawerScreenState: State<ExpandedBoardDrawerState> = _drawerScreenState
+
+    private val preferences: UserPreferences by inject()
+    val boardBackground by mutableStateOf(preferences.boardBackground)
+
+    fun updateBoardBackground(imageUri: String) =
+        CoroutineScope(coroutineContext).launch {
+            preferences.updateBoardBackground(imageUri)
+        }
 
     /**
      * A Board has a list of Lists: Board = f(List)
      * A List has a list of Cards: List = f(Card)
      * A new Card has to be inserted in the list Cards of a Board
      */
-    fun getBoardData() {
-        CoroutineScope(coroutineContext).launch {
-            // Trigger repository requests in parallel
-            val boardDeferred = async { getFakeBoard() }
+    fun getBoardData() = CoroutineScope(coroutineContext).launch {
+        // Trigger repository requests in parallel
+        val boardDeferred = async { getFakeBoard() }
 
-            // Wait for all requests to finish
-            val board = boardDeferred.await().successOr(BoardModel())
+        // Wait for all requests to finish
+        val board = boardDeferred.await().successOr(BoardModel())
 
-            boardInfo.value = Pair(board.id, board.title)
+        boardInfo.value = Pair(board.id, board.title)
 
-            // Executed for once when ui is loaded
-            if (_lists.isEmpty()) {
-                _lists.addAll(board.lists)
-                _lists.forEach { list ->
-                    totalCards += list.cards.size
-                }
+        // Executed for once when ui is loaded
+        if (_lists.isEmpty()) {
+            _lists.addAll(board.lists)
+            _lists.forEach { list ->
+                totalCards += list.cards.size
             }
         }
     }
 
-    fun addNewCardInList(listId: Int) {
-        CoroutineScope(coroutineContext).launch {
-            totalCards += 1
-            val newCardIndex = totalCards
-            _lists.find { it.id == listId }?.cards?.add(
-                CardModel(id = newCardIndex, title = "New Card", listId = listId)
-            )
-        }
+    fun addNewCardInList(listId: Int) = CoroutineScope(coroutineContext).launch {
+        totalCards += 1
+        val newCardIndex = totalCards
+        _lists.find { it.id == listId }?.cards?.add(
+            CardModel(id = newCardIndex, title = "New Card", listId = listId)
+        )
     }
 
     fun moveCardToDifferentList(
         cardId: Int,
         oldListId: Int,
         newListId: Int
-    ) {
-        CoroutineScope(coroutineContext).launch {
-            // Locate the card to be moved
-            val cardToMove = _lists.find { it.id == oldListId }?.cards?.find { it.id == cardId }
+    ) = CoroutineScope(coroutineContext).launch {
+        // Locate the card to be moved
+        val cardToMove = _lists.find { it.id == oldListId }?.cards?.find { it.id == cardId }
 
-            // Removing a card from one list and adding to a new list
-            // Basically, modifying the internal data of two list-items simultaneously
-            cardToMove?.let { safeCard ->
-                _lists.find { it.id == oldListId }?.cards?.removeAll { it.id == safeCard.id }
-                _lists.find { it.id == newListId }?.cards?.add(safeCard.copy(listId = newListId))
-            }
+        // Removing a card from one list and adding to a new list
+        // Basically, modifying the internal data of two list-items simultaneously
+        cardToMove?.let { safeCard ->
+            _lists.find { it.id == oldListId }?.cards?.removeAll { it.id == safeCard.id }
+            _lists.find { it.id == newListId }?.cards?.add(safeCard.copy(listId = newListId))
         }
     }
 
-    fun addNewList() {
-        _lists.add(
-            ListModel(id = _lists.size + 1, title = "New List")
-        )
-    }
+    fun addNewList() = _lists.add(ListModel(id = _lists.size + 1, title = "New List"))
 
-    private fun getFakeBoard(): Result<BoardModel> {
-        return Result.Success(Board)
-    }
+
+    private fun getFakeBoard(): Result<BoardModel> = Result.Success(Board)
 
     fun changeExpandedScreenState(newState: ExpandedBoardDrawerState) {
         _drawerScreenState.value = newState

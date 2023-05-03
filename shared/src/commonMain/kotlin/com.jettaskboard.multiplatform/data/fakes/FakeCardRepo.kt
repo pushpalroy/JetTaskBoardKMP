@@ -1,4 +1,4 @@
-package com.jettaskboard.multiplatform.data.util
+package com.jettaskboard.multiplatform.data.fakes
 
 import com.jettaskboard.multiplatform.domain.model.BoardModel
 import com.jettaskboard.multiplatform.domain.model.CardModel

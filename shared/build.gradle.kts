@@ -4,6 +4,7 @@ import org.jetbrains.compose.compose
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    kotlin("plugin.serialization").version("1.8.20")
     id("com.android.library")
     id("org.jetbrains.compose")
     id("kotlin-parcelize")
@@ -61,6 +62,13 @@ kotlin {
                 implementation(libs.essenty.parcelable)
                 api(libs.decompose)
                 implementation(libs.decompose.compose.multiplatform)
+                implementation("io.ktor:ktor-client-core:2.3.0")
+                implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
+                implementation("io.ktor:ktor-client-logging:2.2.1")
+                implementation("io.github.aakira:napier:2.6.1")
+                implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0")
+                implementation("com.russhwolf:multiplatform-settings-coroutines:1.0.0")
             }
         }
 
@@ -92,6 +100,8 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.common)
                 implementation(compose.desktop.currentOs)
+                implementation("io.ktor:ktor-client-okhttp:2.3.0")
+                implementation("org.slf4j:slf4j-simple:2.0.7")
             }
         }
     }

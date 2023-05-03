@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.jettaskboard.multiplatform.ui.components.zoomable.Zoomable
 import com.jettaskboard.multiplatform.ui.components.zoomable.rememberZoomableState
 import com.jettaskboard.multiplatform.ui.components.board.Board
+import com.jettaskboard.multiplatform.ui.screens.board.changeBg.ChangeBoardBackgroundRoute
 import com.jettaskboard.multiplatform.ui.theme.DefaultTaskBoardBGColor
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
 import com.jettaskboard.multiplatform.util.dropdown.JDropdownMenu
@@ -59,6 +61,7 @@ fun TaskBoardRoute(
     backgroundColor: Color = MaterialTheme.colors.surface
 ) {
     val viewModel = rememberViewModel(TaskBoardViewModel::class) { TaskBoardViewModel() }
+    val boardBackground by viewModel.boardBackground.collectAsState(initial = "https://images.unsplash.com/photo-1523895665936-7bfe172b757d")
     val expandedScreenState = viewModel.drawerScreenState.value
     val scaffoldState = rememberScaffoldState()
     val zoomableState = rememberZoomableState()
@@ -120,7 +123,7 @@ fun TaskBoardRoute(
                 contentAlignment = Alignment.TopEnd
             ) {
                 AsyncImage(
-                    imageUrl = "https://images.unsplash.com/photo-1523895665936-7bfe172b757d",
+                    imageUrl = boardBackground,
                     contentDescription = "Board background",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.matchParentSize(),
@@ -166,23 +169,25 @@ fun TaskBoardRoute(
                             when (expandedScreenState) {
                                 ExpandedBoardDrawerState.DRAWER_SCREEN_STATE -> {
                                     TaskBoardExpandedScreenDrawer(
-                                        navigateToChangeBackgroundRoute = { changeBgScreen ->
+                                        navigateToChangeBackgroundRoute = {
                                             viewModel.changeExpandedScreenState(
                                                 ExpandedBoardDrawerState.CHANGE_BACKGROUND_SCREEN_STATE
                                             )
-//                                            navigateToChangeBackgroundScreen(changeBgScreen)
                                         }
                                     )
                                 }
 
                                 ExpandedBoardDrawerState.CHANGE_BACKGROUND_SCREEN_STATE -> {
-//                                    ChangeBoardBackgroundRoute(
-//                                        onBackClick = {
-//                                            viewModel.changeExpandedScreenState(
-//                                                ExpandedBoardDrawerState.DRAWER_SCREEN_STATE
-//                                            )
-//                                        }
-//                                    )
+                                    ChangeBoardBackgroundRoute(
+                                        onBackClick = {
+                                            viewModel.changeExpandedScreenState(
+                                                ExpandedBoardDrawerState.DRAWER_SCREEN_STATE
+                                            )
+                                        },
+                                        onImageSelected = { imageUri ->
+                                            viewModel.updateBoardBackground(imageUri)
+                                        }
+                                    )
                                 }
 
                                 ExpandedBoardDrawerState.FILTER_SCREEN_STATE -> {
