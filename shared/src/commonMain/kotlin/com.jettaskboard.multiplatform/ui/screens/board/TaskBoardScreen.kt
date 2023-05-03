@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -42,6 +43,8 @@ import com.jettaskboard.multiplatform.ui.components.zoomable.rememberZoomableSta
 import com.jettaskboard.multiplatform.ui.components.board.Board
 import com.jettaskboard.multiplatform.ui.theme.DefaultTaskBoardBGColor
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
+import com.jettaskboard.multiplatform.util.dropdown.JDropdownMenu
+import com.jettaskboard.multiplatform.util.dropdown.JDropdownMenuItem
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -185,14 +188,6 @@ fun TaskBoardRoute(
                                 ExpandedBoardDrawerState.FILTER_SCREEN_STATE -> {
                                     // Do Nothing
                                 }
-
-                                ExpandedBoardDrawerState.AUTOMATION_SCREEN_STATE -> {
-                                    // Do Nothing
-                                }
-
-                                ExpandedBoardDrawerState.POWER_UP_SCREEN_STATE -> {
-                                    // Do Nothing
-                                }
                             }
                         }
                     }
@@ -228,22 +223,74 @@ fun TopAppBar(
         title = { Text(text = title) },
         actions = {
             if (isExpandedScreen) {
-                IconButton(onClick = {
-                    onHamBurgerIconClicked()
-                }) {
+                IconButton(
+                    onClick = { onHamBurgerIconClicked() }) {
                     Icon(
                         imageVector = Icons.Default.Menu,
-                        contentDescription = "Hamburger Menu Icon"
+                        contentDescription = "Hamburger Menu"
                     )
                 }
             } else {
-                IconButton(onClick = {
-                    displayTaskBoardToolbarMenuState = !displayTaskBoardToolbarMenuState
-                }) {
+                IconButton(
+                    onClick = {
+                        displayTaskBoardToolbarMenuState = !displayTaskBoardToolbarMenuState
+                    }
+                ) {
                     Icon(
                         imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Toolbar Menu Icon"
+                        contentDescription = "Toolbar Menu"
                     )
+                }
+
+                // DropDown
+                JDropdownMenu(
+                    expanded = displayTaskBoardToolbarMenuState,
+                    onDismissRequest = { displayTaskBoardToolbarMenuState = false },
+                ) {
+                    JDropdownMenuItem(
+                        onSelect = { navigateToChangeBackgroundScreen("") }
+                    ) {
+                        Icon(
+                            painter = painterResource("ic_baseline_wallpaper_24.xml"),
+                            modifier = Modifier.size(18.dp),
+                            contentDescription = "star",
+                            tint = Color(0xFFFFEB3B)
+                        )
+                        Text(
+                            modifier = Modifier.padding(start = 8.dp),
+                            text = "Change Background"
+                        )
+                    }
+
+                    JDropdownMenuItem(
+                        onSelect = { navigateToChangeBackgroundScreen("") }
+                    ) {
+                        Icon(
+                            painter = painterResource("ic_baseline_filter_list_24.xml"),
+                            modifier = Modifier.size(18.dp),
+                            contentDescription = "star",
+                            tint = Color(0xFFFFEB3B)
+                        )
+                        Text(
+                            modifier = Modifier.padding(start = 8.dp),
+                            text = "Filter"
+                        )
+                    }
+
+                    JDropdownMenuItem(
+                        onSelect = { navigateToChangeBackgroundScreen("") }
+                    ) {
+                        Icon(
+                            painter = painterResource("ic_baseline_automation_icon.xml"),
+                            modifier = Modifier.size(18.dp),
+                            contentDescription = "star",
+                            tint = Color(0xFFFFEB3B)
+                        )
+                        Text(
+                            modifier = Modifier.padding(start = 8.dp),
+                            text = "Automation"
+                        )
+                    }
                 }
             }
         }

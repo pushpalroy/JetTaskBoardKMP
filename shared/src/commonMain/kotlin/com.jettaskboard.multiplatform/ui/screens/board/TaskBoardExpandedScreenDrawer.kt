@@ -40,12 +40,5 @@ fun TaskBoardExpandedScreenDrawer(
             icon = painterResource("ic_baseline_automation_icon.xml"),
             onItemClickListener = navigateToChangeBackgroundRoute
         )
-
-        // Power's-up Item
-        TaskBoardExpandedScreenDrawerItem(
-            title = "Power's-up",
-            icon = painterResource("ic_baseline_circle_notifications_24.xml"),
-            onItemClickListener = navigateToChangeBackgroundRoute
-        )
     }
 }
