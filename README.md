@@ -12,10 +12,10 @@
         <img src="https://img.shields.io/badge/Kotlin-1.8.20-blue.svg?color=blue&style=for-the-badge"/>
       </a>
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/stargazers">
-        <img src="https://img.shields.io/github/stars/pushpalroy/JetTaskBoardKMP?color=green&style=for-the-badge" />
+        <img src="https://img.shields.io/github/stars/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
       </a>
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/network/members">
-          <img src="https://img.shields.io/github/forks/pushpalroy/JetTaskBoardKMP?color=green&style=for-the-badge" />
+          <img src="https://img.shields.io/github/forks/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
       </a>
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/watchers">
           <img src="https://img.shields.io/github/watchers/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
@@ -94,7 +94,7 @@ Before you start, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to e
 
 Otherwise, KDoctor will highlight which parts of your setup still need to be configured and will suggest a way to fix them.
 
-## Examine the project structure
+## Understanding the project structure
 
 Open the project in Android Studio and switch the view from **Android** to **Project** to see all the files and targets belonging to the project:
 
@@ -130,9 +130,7 @@ To run your application on an Android emulator:
 2. In the list of run configurations, select `androidApp`.
 3. Choose your virtual device and click **Run**:
 
-   <img src="readme_images/run_on_android.png" height="60px">
-
-   <img src="readme_images/android_app_running.png" height="200px">
+   <img src="art/run_on_android.png" height="60px">
 
 <details>
   <summary>Alternatively, use Gradle</summary>
@@ -149,16 +147,11 @@ To run your application on an iOS simulator in Android Studio, modify the `iosAp
 
 1. In the list of run configurations, select **Edit Configurations**:
 
-   <img src="readme_images/edit_run_config.png" height="200px">
+   <img src="art/edit_run_config.png" height="200px">
 
 2. Navigate to **iOS Application** | **iosApp**.
-3. In the **Execution target** list, select your target device. Click **OK**:
-
-   <img src="readme_images/target_device.png">
-
-4. The `iosApp` run configuration is now available. Click **Run** next to your virtual device:
-
-<img src="readme_images/hello_world_ios.png" height="200px">
+3. In the **Execution target** list, select your target device. Click **OK**.
+4. The `iosApp` run configuration is now available. Click **Run** next to your virtual device.
 
 #### Running on a real device
 
