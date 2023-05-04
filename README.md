@@ -1,4 +1,4 @@
-## JetTaskBoardKMP - Multiplatform Trello Clone
+## 📋 JetTaskBoardKMP - Multiplatform Trello Clone
 
   <p align="left"> A clone of Trello app built using Compose Multiplatform for Android, iOS and Desktop.</p>
 
@@ -55,8 +55,8 @@ Special thanks to [xxfast/KRouter](https://github.com/xxfast/KRouter) library.
     <th>Board</th>
   </tr>
   <tr>
-    <td><img src = "art/home.png" width=360/></td> 
-    <td><img src = "art/board.png" width=360/></td>
+    <td><img src = "art/home.png" width="100%"/></td> 
+    <td><img src = "art/board.png" width="100%"/></td>
   </tr>
 </table>
 
