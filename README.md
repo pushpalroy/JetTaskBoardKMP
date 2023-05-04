@@ -35,17 +35,20 @@ JetTaskBoardKMP follows the principles of Clean Architecture.
 
 ### 👨‍💻 Tech stack
 
-| Tools               |                                     Link                                      |
-|:--------------------|:-----------------------------------------------------------------------------:|
-| 🤖 Language         |                       [Kotlin](https://kotlinlang.org)                        |
-| 💚 Framework        |  [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform)  |
-| 🏛 Lifecycle        |                [Essenty](https://github.com/arkivanov/Essenty)                |
-| 💉 State Management |              [Decompose](https://github.com/arkivanov/decompose)              |
-| 🌐 Networking       |                    [KTor](https://github.com/ktorio/ktor)                     |
-| 🌊 Multi-threading  |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
-| 🪟 Persistence      | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
+| Tools                 |                                     Link                                      |
+|:----------------------|:-----------------------------------------------------------------------------:|
+| 🤖  Language          |                       [Kotlin](https://kotlinlang.org)                        |
+| 🩶  Framework         |  [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform)  |
+| 🕜  Lifecycle         |                [Essenty](https://github.com/arkivanov/Essenty)                |
+| 📁  State Management  |              [Decompose](https://github.com/arkivanov/decompose)              |
+| 💉  DI                |          [Koin](https://insert-koin.io/docs/reference/koin-mp/kmp/)           |
+| 🧭  Navigation        |              [xxfast/KRouter](https://github.com/xxfast/KRouter)              |
+| 🌐  Networking        |                    [KTor](https://github.com/ktorio/ktor)                     |
+| 🧶  Multi-threading   |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
+| 📼  Persistence       | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
+| 🔍  Zooming Behaviour |               [Zoomables](https://github.com/Mr-Pine/Zoomables)               |
 
-Special thanks to [xxfast/KRouter](https://github.com/xxfast/KRouter) library.
+Special thanks to [xxfast/KRouter](https://github.com/xxfast/KRouter) library .
 
 ### 🖥️  Screenshots
 

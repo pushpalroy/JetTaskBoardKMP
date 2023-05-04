@@ -37,32 +37,26 @@ import com.jettaskboard.multiplatform.ui.components.draganddrop.DragAndDropState
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DragAndDropSurface
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DragSurface
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DropSurface
-import com.jettaskboard.multiplatform.ui.screens.board.TaskBoardViewModel
 import com.jettaskboard.multiplatform.ui.theme.SecondaryColor
-import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
 
 @Composable
 fun Board(
     modifier: Modifier = Modifier,
-    navigateToCreateCard: (String) -> Unit = {},
-    isExpandedScreen: Boolean
+    lists: List<ListModel>,
+    onAddNewCardClicked: (Int) -> Unit,
+    onAddNewListClicked: () -> Unit,
+    navigateToCreateCard: (String) -> Unit,
+    onCardMovedToDifferentList: (Int, Int, Int) -> Unit,
+    isExpandedScreen: Boolean = false
 ) {
-    val viewModel = rememberViewModel(TaskBoardViewModel::class) { TaskBoardViewModel() }
     val boardState = remember { DragAndDropState(isExpandedScreen) }
-    val lists = remember(viewModel.totalCards) { viewModel.lists }
-
-    LaunchedEffect(Unit) {
-        viewModel.apply {
-            getBoardData()
-        }
-    }
 
     LaunchedEffect(key1 = boardState.movingCardData) {
         if (boardState.hasCardMoved()) {
-            viewModel.moveCardToDifferentList(
-                cardId = boardState.movingCardData.first,
-                oldListId = boardState.cardDraggedInitialListId,
-                newListId = boardState.movingCardData.second
+            onCardMovedToDifferentList(
+                boardState.movingCardData.first,
+                boardState.cardDraggedInitialListId,
+                boardState.movingCardData.second
             )
         }
     }
@@ -81,14 +75,12 @@ fun Board(
                     listModel = list,
                     isExpandedScreen = isExpandedScreen,
                     onTaskCardClick = navigateToCreateCard,
-                    onAddCardClick = {
-                        viewModel.addNewCardInList(list.id)
-                    }
+                    onAddCardClick = { onAddNewCardClicked(list.id) }
                 )
             }
             item {
                 AddNewListButton(
-                    viewModel = viewModel,
+                    onClick = onAddNewListClicked,
                     isExpandedScreen = isExpandedScreen
                 )
             }
@@ -156,10 +148,10 @@ fun ListBody(
                 cardListId = card.listId ?: 0
             ) {
                 TaskCard(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { onTaskCardClick("1") },
                     card = card,
-                    isExpandedScreen = isExpandedScreen
+                    onClick = { onTaskCardClick("1") },
+                    isExpandedScreen = isExpandedScreen,
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
@@ -215,7 +207,7 @@ fun ListFooter(
 
 @Composable
 fun AddNewListButton(
-    viewModel: TaskBoardViewModel,
+    onClick: () -> Unit = {},
     isExpandedScreen: Boolean
 ) {
     TextButton(
@@ -227,7 +219,7 @@ fun AddNewListButton(
             backgroundColor = Color(0xFF383838)
         ),
         contentPadding = PaddingValues(16.dp),
-        onClick = { viewModel.addNewList() }
+        onClick = onClick
     ) {
         Icon(imageVector = Filled.Add, contentDescription = "Add")
         Spacer(modifier = Modifier.width(8.dp))

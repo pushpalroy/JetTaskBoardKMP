@@ -52,6 +52,10 @@ class TaskBoardViewModel : ViewModel() {
             preferences.updateBoardBackground(imageUri)
         }
 
+    init {
+        getBoardData()
+    }
+
     /**
      * A Board has a list of Lists: Board = f(List)
      * A List has a list of Cards: List = f(Card)

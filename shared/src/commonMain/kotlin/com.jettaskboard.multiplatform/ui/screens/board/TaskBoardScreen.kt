@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.jettaskboard.multiplatform.data.util.Constants
 import com.jettaskboard.multiplatform.ui.components.zoomable.Zoomable
 import com.jettaskboard.multiplatform.ui.components.zoomable.rememberZoomableState
 import com.jettaskboard.multiplatform.ui.components.board.Board
@@ -62,9 +63,11 @@ fun TaskBoardRoute(
     boardBg: String? = null
 ) {
     val viewModel = rememberViewModel(TaskBoardViewModel::class) { TaskBoardViewModel() }
-    val boardBackground by viewModel.boardBackground.collectAsState(initial = "https://images.unsplash.com/photo-1523895665936-7bfe172b757d")
+    val boardBackground by viewModel.boardBackground.collectAsState(initial = Constants.DEFAULT_BOARD_BG)
+    val lists = remember(viewModel.totalCards) { viewModel.lists }
     val expandedScreenState = viewModel.drawerScreenState.value
     var expandedPanel by remember { mutableStateOf(false) }
+
     val scaffoldState = rememberScaffoldState()
     val zoomableState = rememberZoomableState()
     val coroutineScope = rememberCoroutineScope()
@@ -142,9 +145,17 @@ fun TaskBoardRoute(
                     zoomableState = zoomableState
                 ) {
                     Board(
-                        modifier = Modifier.fillMaxSize(),
+                        lists = lists,
+                        onAddNewCardClicked = { listId -> viewModel.addNewCardInList(listId) },
+                        onAddNewListClicked = { viewModel.addNewList() },
+                        onCardMovedToDifferentList = { cardId, oldListId, newListId ->
+                            viewModel.moveCardToDifferentList(
+                                cardId, oldListId, newListId
+                            )
+                        },
                         navigateToCreateCard = navigateToCreateCard,
-                        isExpandedScreen = isExpandedScreen
+                        isExpandedScreen = isExpandedScreen,
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
 
