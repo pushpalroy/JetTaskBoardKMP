@@ -17,7 +17,7 @@ fun main() = application {
 
     val rootComponentContext = DefaultComponentContext(lifecycle = lifecycle)
     Window(
-        title = "JetTaskBoardKMM",
+        title = "JetTaskBoardKMP",
         state = rememberWindowState(width = 800.dp, height = 600.dp),
         onCloseRequest = ::exitApplication,
     ) {
