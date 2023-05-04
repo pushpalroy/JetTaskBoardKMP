@@ -1,28 +1,68 @@
-[![official project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-# [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) mobile application
+## JetTaskBoardKMP - Multiplatform Trello Clone
 
-> **Note**
-> Compose Multiplatform for iOS is in Alpha. It may change incompatibly and require manual migration in the future.
-> We would appreciate your feedback on it in the public Slack channel [#compose-ios](https://kotlinlang.slack.com/archives/C0346LWVBJ4/p1678888063176359).
-> If you have any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
+  <p align="left"> A clone of Trello app built using Compose Multiplatform for Android, iOS and Desktop.</p>
 
-You can use this template to start developing your own [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform#readme) mobile application targeting Android and iOS.
-Follow our tutorial below to get your first Compose Multiplatform app up and running.
-The result will be a [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) project that uses the Compose Multiplatform UI framework.
+   This app was previously written in Jetpack Compose for Android in [JetTaskBoard](https://github.com/pushpalroy/jetTaskBoard). It is now re-written using multiplatform.
 
-![](readme_images/banner.png)
+  <p align="left">
+      <a href = "https://github.com/JetBrains/compose-multiplatform/releases">
+        <img src = "https://img.shields.io/badge/Compose%20Multiplatform-1.4.0-blue.svg?color=blue&style=for-the-badge" />
+      </a>
+      <a href="https://kotlinlang.org/docs/releases.html">
+        <img src="https://img.shields.io/badge/Kotlin-1.8.20-blue.svg?color=blue&style=for-the-badge"/>
+      </a>
+      <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/stargazers">
+        <img src="https://img.shields.io/github/stars/pushpalroy/JetTaskBoardKMP?color=green&style=for-the-badge" />
+      </a>
+      <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/network/members">
+          <img src="https://img.shields.io/github/forks/pushpalroy/JetTaskBoardKMP?color=green&style=for-the-badge" />
+      </a>
+      <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/watchers">
+          <img src="https://img.shields.io/github/watchers/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
+      </a>
+      <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/issues">
+          <img src="https://img.shields.io/github/issues/pushpalroy/JetTaskBoardKMP?color=orange&style=for-the-badge" />
+      </a>
+  </p>
 
-If you want to create an application targeting desktop platforms – Windows, macOS, or Linux –
-use the [Compose Multiplatform desktop application template](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme).
+### Application demo
 
-## Set up the environment
+<video src="https://user-images.githubusercontent.com/19844292/236077021-fa5c8b68-a9e2-4c82-942c-dc3500b5b7b7.mp4"></video>
 
-> **Warning**
-> You need a Mac with macOS to write and run iOS-specific code on simulated or real devices.
-> This is an Apple requirement.
+### ⚒️ Architecture
 
-To work with this template, you need the following:
+JetTaskBoardKMP follows the principles of Clean Architecture.
+
+### 👨‍💻 Tech stack
+
+| Tools               |                                     Link                                      |
+|:--------------------|:-----------------------------------------------------------------------------:|
+| 🤖 Language         |                       [Kotlin](https://kotlinlang.org)                        |
+| 💚 Framework        |  [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform)  |
+| 🏛 Lifecycle        |                [Essenty](https://github.com/arkivanov/Essenty)                |
+| 💉 State Management |              [Decompose](https://github.com/arkivanov/decompose)              |
+| 🌐 Networking       |                    [KTor](https://github.com/ktorio/ktor)                     |
+| 🌊 Multi-threading  |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
+| 🪟 Persistence      | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
+
+Special thanks to [xxfast/KRouter](https://github.com/xxfast/KRouter) library.
+
+### 🖥️  Screenshots
+
+<table style="width:100%">
+  <tr>
+    <th>Home</th>
+    <th>Board</th>
+  </tr>
+  <tr>
+    <td><img src = "art/home.png" width=240/></td> 
+    <td><img src = "art/board.png" width=240/></td>
+  </tr>
+</table>
+
+### How to run the project? ✅
+
+To run this project, you need the following:
 
 * A machine running a recent version of macOS
 * [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
@@ -155,130 +195,37 @@ To do so, you'll need the following:
 
 </details>
 
-##### Finding your Team ID
+### On Desktop
 
-In the terminal, run `kdoctor --team-ids` to find your Team ID.
-KDoctor will list all Team IDs currently configured on your system, for example:
+To run the application on desktop:
 
-```text
-3ABC246XYZ (Max Sample)
-ZABCW6SXYZ (SampleTech Inc.)
+1. Execute the command from terminal: ``./gradlew :shared:run ``
+
+### Find this project useful ? ❤️
+
+- Support it by clicking the ⭐️ button on the upper right of this page. ✌️
+
+### License
+
 ```
+MIT License
 
-<details>
-<summary>Alternative way to find your Team ID</summary>
+Copyright (c) 2022 Pushpal Roy
 
-If KDoctor doesn't work for you, try this alternative method:
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:
 
-1. In Android Studio, run the `iosApp` configuration with the selected real device. The build should fail.
-2. Go to Xcode and select **Open a project or file**.
-3. Navigate to the `iosApp/iosApp.xcworkspace` file of your project.
-4. In the left-hand menu, select `iosApp`.
-5. Navigate to **Signing & Capabilities**.
-6. In the **Team** list, select your team.
+The above copyright notice and this permission notice shall be included 
+in all copies or substantial portions of the Software.
 
-If you haven't set up your team yet, use the **Add account** option and follow the steps.
-
-</details>
-
-To run the application, set the `TEAM_ID`:
-
-1. In the template, navigate to the `iosApp/Configuration/Config.xcconfig` file.
-2. Set your `TEAM_ID`.
-3. Re-open the project in Android Studio. It should show the registered iOS device in the `iosApp` run configuration.
-
-## Make your first changes
-
-You can now make some changes in the code and check that they are visible in both the iOS and Android applications at the same time:
-
-1. In Android Studio, navigate to the `shared/src/commonMain/kotlin/App.kt` file.
-   This is the common entry point for your Compose Multiplatform app.
-
-   Here, you see the code responsible for rendering the "Hello, World!" button and the animated Compose Multiplatform logo:
-
-   ```kotlin
-   @OptIn(ExperimentalResourceApi::class)
-   @Composable
-   fun App() {
-       MaterialTheme {
-           var greetingText by remember { mutableStateOf("Hello, World!") }
-           var showImage by remember { mutableStateOf(false) }
-           Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-               Button(onClick = {
-                   greetingText = "Hello, ${getPlatformName()}"
-                   showImage = !showImage
-               }) {
-                   Text(greetingText)
-               }
-               AnimatedVisibility(showImage) {
-                   Image(
-                       painterResource("compose-multiplatform.xml"),
-                       null
-                   )
-               }
-           }
-       }
-   }
-   ```
-
-2. Update the shared code by adding a text field that will update the name displayed on the button:
-
-   ```diff
-   @OptIn(ExperimentalResourceApi::class)
-   @Composable
-   fun App() {
-       MaterialTheme {
-           var greetingText by remember { mutableStateOf("Hello, World!") }
-           var showImage by remember { mutableStateOf(false) }
-           Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-               Button(onClick = {
-                   greetingText = "Hello, ${getPlatformName()}"
-                   showImage = !showImage
-               }) {
-                   Text(greetingText)
-               }
-   +           TextField(greetingText, onValueChange = { greetingText = it })
-               AnimatedVisibility(showImage) {
-                   Image(
-                       painterResource("compose-multiplatform.xml"),
-                       null
-                   )
-               }
-           }
-       }
-   }
-   ```
-
-3. Re-run both the `androidApp` and `iosApp` configurations. You'll see this change reflected in both the Android and iOS apps:
-
-   <img src="readme_images/text_field_added.png" height="200px">
-
-## How to configure the iOS application
-
-To get a better understanding of this template's setup and learn how to configure the basic properties of your iOS app without Xcode,
-open the `iosApp/Configuration/Config.xcconfig` file in Android Studio. The configuration file contains:
-
-* `APP_NAME`, a target executable and an application bundle name.
-* `BUNDLE_ID`, which [uniquely identifies the app throughout the system](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier#discussion).
-* `TEAM_ID`, [a unique identifier generated by Apple that's assigned to your team](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/#:~:text=A%20Team%20ID%20is%20a,developer%20in%20App%20Store%20Connect).
-
-To configure the `APP_NAME` option, open `Config.xcconfig` in any text editor *before opening* the project in Android Studio, and then set the desired name.
-
-If you need to change this option after you open the project in Android Studio, do the following:
-
-1. Close the project in Android Studio.
-2. Run `./cleanup.sh` in your terminal.
-3. Change the setting.
-4. Open the project in Android Studio again.
-
-To configure advanced settings, use Xcode. After opening the project in Android Studio,
-open the `iosApp/iosApp.xcworkspace` file in Xcode and make changes there.
-
-## Next steps
-
-We encourage you to explore Compose Multiplatform further and try out more projects:
-
-* [Learn about other cases for using the Compose Multiplatform UI framework](https://github.com/JetBrains/compose-multiplatform#readme)
-* [Create an application targeting Windows, macOS, and Linux with Compose Multiplatform for Desktop](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
-* [Complete more Compose Multiplatform tutorials](https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/README.md)
-* [Explore some more advanced Compose Multiplatform example projects](https://github.com/JetBrains/compose-multiplatform/blob/master/examples/README.md)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
