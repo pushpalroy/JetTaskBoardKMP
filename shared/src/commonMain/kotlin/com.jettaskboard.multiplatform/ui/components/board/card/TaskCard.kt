@@ -7,13 +7,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,9 +30,26 @@ import org.jetbrains.compose.resources.painterResource
 fun TaskCard(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    card: CardModel,
-    isExpandedScreen: Boolean
+    cardModel: CardModel,
+    editModeEnabled: Boolean = false,
+    saveClicked: Boolean,
+    onEditDone: (Int, Int, String) -> Unit,
+    isExpandedScreen: Boolean = false
 ) {
+    val editedTitle = remember { mutableStateOf(TextFieldValue()) }
+
+    LaunchedEffect(saveClicked) {
+        if (saveClicked && editModeEnabled) {
+            cardModel.listId?.let { safeListId ->
+                onEditDone(
+                    cardModel.id,
+                    safeListId,
+                    editedTitle.value.text
+                )
+            }
+        }
+    }
+
     Card(
         modifier = modifier
             .padding(4.dp)
@@ -41,7 +63,7 @@ fun TaskCard(
         Column(
             modifier = Modifier
         ) {
-            card.coverImageUrl?.let { safeCoverImageUrl ->
+            cardModel.coverImageUrl?.let { safeCoverImageUrl ->
                 if (safeCoverImageUrl.isNotEmpty()) {
                     AsyncImage(
                         imageUrl = safeCoverImageUrl,
@@ -56,7 +78,7 @@ fun TaskCard(
             Column(
                 modifier = Modifier.padding(8.dp)
             ) {
-                card.labels.let { cardLabels ->
+                cardModel.labels.let { cardLabels ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -76,59 +98,65 @@ fun TaskCard(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Text(
-                    modifier = Modifier,
-                    text = card.title,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    style = TextStyle(
-                        fontSize = 12.sp
+                if (editModeEnabled) {
+                    TextField(
+                        value = editedTitle.value,
+                        onValueChange = { editedTitle.value = it }
                     )
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                card.description?.let { safeDescription ->
-                    if (safeDescription.isNotEmpty() && isExpandedScreen) {
-                        Text(
-                            modifier = Modifier,
-                            text = safeDescription,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis,
-                            style = TextStyle(
-                                fontSize = 10.sp
-                            )
+                } else {
+                    Text(
+                        modifier = Modifier,
+                        text = cardModel.title,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = TextStyle(
+                            fontSize = 12.sp
                         )
-                    }
-                }
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                Spacer(modifier = Modifier.height(2.dp))
-
-                Row(
-                    modifier = Modifier
-                        .height(16.dp)
-                        .fillMaxWidth()
-                        .padding(top = 0.dp),
-                    horizontalArrangement = Arrangement.Start
-                ) {
-                    card.description?.let { safeDescription ->
-                        if (safeDescription.isNotEmpty()) {
-                            Icon(
+                    cardModel.description?.let { safeDescription ->
+                        if (safeDescription.isNotEmpty() && isExpandedScreen) {
+                            Text(
                                 modifier = Modifier,
-                                painter = painterResource("ic_notes.xml"),
-                                tint = Color.White,
-                                contentDescription = null
+                                text = safeDescription,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                style = TextStyle(
+                                    fontSize = 10.sp
+                                )
                             )
                         }
                     }
-                    Icon(
+
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    Row(
                         modifier = Modifier
-                            .padding(start = 4.dp)
-                            .rotate(130f),
-                        painter = painterResource("ic_attachment.xml"),
-                        tint = Color.White,
-                        contentDescription = null
-                    )
+                            .height(16.dp)
+                            .fillMaxWidth()
+                            .padding(top = 0.dp),
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        cardModel.description?.let { safeDescription ->
+                            if (safeDescription.isNotEmpty()) {
+                                Icon(
+                                    modifier = Modifier,
+                                    painter = painterResource("ic_notes.xml"),
+                                    tint = Color.White,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                        Icon(
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                                .rotate(130f),
+                            painter = painterResource("ic_attachment.xml"),
+                            tint = Color.White,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
         }

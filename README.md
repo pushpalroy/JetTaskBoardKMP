@@ -2,7 +2,7 @@
 
   <p align="left"> A clone of Trello app built using Compose Multiplatform for Android, iOS and Desktop.</p>
 
-   This app was previously written in Jetpack Compose for Android in [JetTaskBoard](https://github.com/pushpalroy/jetTaskBoard). It is now re-written using multiplatform.
+   This app was previously written in Jetpack Compose for Android in [JetTaskBoard](https://github.com/pushpalroy/jetTaskBoard). Now, it has been migrated to multiplatform.
 
   <p align="left">
       <a href = "https://github.com/JetBrains/compose-multiplatform/releases">
@@ -47,8 +47,6 @@ JetTaskBoardKMP follows the principles of Clean Architecture.
 | 🧶  Multi-threading   |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
 | 📼  Persistence       | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
 | 🔍  Zooming Behaviour |               [Zoomables](https://github.com/Mr-Pine/Zoomables)               |
-
-Special thanks to [xxfast/KRouter](https://github.com/xxfast/KRouter) library .
 
 ### 🖥️  Screenshots
 

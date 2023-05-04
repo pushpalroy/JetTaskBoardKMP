@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -67,6 +68,8 @@ fun TaskBoardRoute(
     val lists = remember(viewModel.totalCards) { viewModel.lists }
     val expandedScreenState = viewModel.drawerScreenState.value
     var expandedPanel by remember { mutableStateOf(false) }
+    var editModeEnabled by remember { mutableStateOf(false) }
+    var saveClicked by remember { mutableStateOf(false) }
 
     val scaffoldState = rememberScaffoldState()
     val zoomableState = rememberZoomableState()
@@ -83,7 +86,7 @@ fun TaskBoardRoute(
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopAppBar(
+            TaskBoardAppBar(
                 isExpandedScreen = isExpandedScreen,
                 onBackClick = onBackClick,
                 title = viewModel.boardInfo.value.second,
@@ -92,7 +95,11 @@ fun TaskBoardRoute(
                 },
                 onHamBurgerIconClicked = {
                     expandedPanel = !expandedPanel
-                }
+                },
+                onSaveClicked = {
+                    saveClicked = true
+                },
+                editModeEnabled = editModeEnabled
             )
         },
         floatingActionButton = {
@@ -145,8 +152,17 @@ fun TaskBoardRoute(
                     zoomableState = zoomableState
                 ) {
                     Board(
+                        modifier = Modifier.fillMaxSize(),
                         lists = lists,
-                        onAddNewCardClicked = { listId -> viewModel.addNewCardInList(listId) },
+                        onAddNewCardClicked = { listId ->
+                            viewModel.addNewCardInList(listId)
+                            editModeEnabled = true
+                        },
+                        onTaskCardEdited = { cardId, listId, title ->
+                            viewModel.editCardInList(cardId, listId, title)
+                            editModeEnabled = false
+                            saveClicked = false
+                        },
                         onAddNewListClicked = { viewModel.addNewList() },
                         onCardMovedToDifferentList = { cardId, oldListId, newListId ->
                             viewModel.moveCardToDifferentList(
@@ -155,7 +171,7 @@ fun TaskBoardRoute(
                         },
                         navigateToCreateCard = navigateToCreateCard,
                         isExpandedScreen = isExpandedScreen,
-                        modifier = Modifier.fillMaxSize()
+                        saveClicked = saveClicked
                     )
                 }
 
@@ -214,10 +230,12 @@ fun TaskBoardRoute(
 }
 
 @Composable
-fun TopAppBar(
+fun TaskBoardAppBar(
     isExpandedScreen: Boolean = false,
     onBackClick: () -> Unit,
+    onSaveClicked: () -> Unit,
     title: String,
+    editModeEnabled: Boolean,
     navigateToChangeBgScreen: (String) -> Unit,
     onHamBurgerIconClicked: () -> Unit = {}
 ) {
@@ -238,74 +256,84 @@ fun TopAppBar(
         },
         title = { Text(text = title) },
         actions = {
-            if (isExpandedScreen) {
+            if (editModeEnabled) {
                 IconButton(
-                    onClick = { onHamBurgerIconClicked() }) {
+                    onClick = { onSaveClicked() }) {
                     Icon(
-                        imageVector = Icons.Default.Menu,
-                        contentDescription = "Hamburger Menu"
+                        imageVector = Icons.Outlined.Check,
+                        contentDescription = "Save card"
                     )
                 }
             } else {
-                IconButton(
-                    onClick = {
-                        displayTaskBoardToolbarMenuState = !displayTaskBoardToolbarMenuState
+                if (isExpandedScreen) {
+                    IconButton(
+                        onClick = { onHamBurgerIconClicked() }) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Hamburger Menu"
+                        )
                     }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Toolbar Menu"
-                    )
-                }
-
-                // DropDown
-                JDropdownMenu(
-                    expanded = displayTaskBoardToolbarMenuState,
-                    onDismissRequest = { displayTaskBoardToolbarMenuState = false },
-                ) {
-                    JDropdownMenuItem(
-                        onSelect = { navigateToChangeBgScreen("") }
+                } else {
+                    IconButton(
+                        onClick = {
+                            displayTaskBoardToolbarMenuState = !displayTaskBoardToolbarMenuState
+                        }
                     ) {
                         Icon(
-                            painter = painterResource("ic_baseline_wallpaper_24.xml"),
-                            modifier = Modifier.size(18.dp),
-                            contentDescription = "star",
-                            tint = Color(0xFFFFEB3B)
-                        )
-                        Text(
-                            modifier = Modifier.padding(start = 8.dp),
-                            text = "Change Background"
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = "Toolbar Menu"
                         )
                     }
 
-                    JDropdownMenuItem(
-                        onSelect = { navigateToChangeBgScreen("") }
+                    // DropDown
+                    JDropdownMenu(
+                        expanded = displayTaskBoardToolbarMenuState,
+                        onDismissRequest = { displayTaskBoardToolbarMenuState = false },
                     ) {
-                        Icon(
-                            painter = painterResource("ic_baseline_filter_list_24.xml"),
-                            modifier = Modifier.size(18.dp),
-                            contentDescription = "star",
-                            tint = Color(0xFFFFEB3B)
-                        )
-                        Text(
-                            modifier = Modifier.padding(start = 8.dp),
-                            text = "Filter"
-                        )
-                    }
+                        JDropdownMenuItem(
+                            onSelect = { navigateToChangeBgScreen("") }
+                        ) {
+                            Icon(
+                                painter = painterResource("ic_baseline_wallpaper_24.xml"),
+                                modifier = Modifier.size(18.dp),
+                                contentDescription = "star",
+                                tint = Color(0xFFFFEB3B)
+                            )
+                            Text(
+                                modifier = Modifier.padding(start = 8.dp),
+                                text = "Change Background"
+                            )
+                        }
 
-                    JDropdownMenuItem(
-                        onSelect = { navigateToChangeBgScreen("") }
-                    ) {
-                        Icon(
-                            painter = painterResource("ic_baseline_automation_icon.xml"),
-                            modifier = Modifier.size(18.dp),
-                            contentDescription = "star",
-                            tint = Color(0xFFFFEB3B)
-                        )
-                        Text(
-                            modifier = Modifier.padding(start = 8.dp),
-                            text = "Automation"
-                        )
+                        JDropdownMenuItem(
+                            onSelect = { navigateToChangeBgScreen("") }
+                        ) {
+                            Icon(
+                                painter = painterResource("ic_baseline_filter_list_24.xml"),
+                                modifier = Modifier.size(18.dp),
+                                contentDescription = "star",
+                                tint = Color(0xFFFFEB3B)
+                            )
+                            Text(
+                                modifier = Modifier.padding(start = 8.dp),
+                                text = "Filter"
+                            )
+                        }
+
+                        JDropdownMenuItem(
+                            onSelect = { navigateToChangeBgScreen("") }
+                        ) {
+                            Icon(
+                                painter = painterResource("ic_baseline_automation_icon.xml"),
+                                modifier = Modifier.size(18.dp),
+                                contentDescription = "star",
+                                tint = Color(0xFFFFEB3B)
+                            )
+                            Text(
+                                modifier = Modifier.padding(start = 8.dp),
+                                text = "Automation"
+                            )
+                        }
                     }
                 }
             }

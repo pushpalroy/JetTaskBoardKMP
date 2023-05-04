@@ -44,9 +44,11 @@ fun Board(
     modifier: Modifier = Modifier,
     lists: List<ListModel>,
     onAddNewCardClicked: (Int) -> Unit,
+    onTaskCardEdited: (Int, Int, String) -> Unit,
     onAddNewListClicked: () -> Unit,
     navigateToCreateCard: (String) -> Unit,
     onCardMovedToDifferentList: (Int, Int, Int) -> Unit,
+    saveClicked: Boolean,
     isExpandedScreen: Boolean = false
 ) {
     val boardState = remember { DragAndDropState(isExpandedScreen) }
@@ -66,8 +68,7 @@ fun Board(
         state = boardState
     ) {
         LazyRow(
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         ) {
             items(lists) { list ->
                 Lists(
@@ -75,7 +76,9 @@ fun Board(
                     listModel = list,
                     isExpandedScreen = isExpandedScreen,
                     onTaskCardClick = navigateToCreateCard,
-                    onAddCardClick = { onAddNewCardClicked(list.id) }
+                    onAddCardClick = { onAddNewCardClicked(list.id) },
+                    onTaskCardEditDone = onTaskCardEdited,
+                    saveClicked = saveClicked
                 )
             }
             item {
@@ -93,7 +96,9 @@ fun Lists(
     boardState: DragAndDropState,
     listModel: ListModel,
     onTaskCardClick: (String) -> Unit,
+    onTaskCardEditDone: (Int, Int, String) -> Unit,
     onAddCardClick: () -> Unit,
+    saveClicked: Boolean,
     isExpandedScreen: Boolean
 ) {
     DropSurface(
@@ -120,8 +125,10 @@ fun Lists(
                 modifier = Modifier,
                 listModel = listModel,
                 onTaskCardClick = onTaskCardClick,
+                onTaskCardEditDone = onTaskCardEditDone,
                 onAddCardClick = onAddCardClick,
-                isExpandedScreen = isExpandedScreen
+                isExpandedScreen = isExpandedScreen,
+                saveClicked = saveClicked
             )
         }
     }
@@ -133,13 +140,18 @@ fun ListBody(
     modifier: Modifier,
     listModel: ListModel,
     onTaskCardClick: (String) -> Unit,
+    onTaskCardEditDone: (Int, Int, String) -> Unit,
     onAddCardClick: () -> Unit,
+    saveClicked: Boolean,
     isExpandedScreen: Boolean
 ) {
     LazyColumn(
         modifier = Modifier
     ) {
-        items(listModel.cards) { card ->
+        items(
+            items = listModel.cards,
+            key = { card -> card.id }
+        ) { card ->
             DragSurface(
                 modifier = modifier
                     .fillMaxWidth()
@@ -148,10 +160,13 @@ fun ListBody(
                 cardListId = card.listId ?: 0
             ) {
                 TaskCard(
-                    card = card,
+                    cardModel = card,
                     onClick = { onTaskCardClick("1") },
                     isExpandedScreen = isExpandedScreen,
-                    modifier = Modifier.fillMaxWidth()
+                    editModeEnabled = card.title.isEmpty(),
+                    onEditDone = onTaskCardEditDone,
+                    modifier = Modifier.fillMaxWidth(),
+                    saveClicked = saveClicked
                 )
             }
         }

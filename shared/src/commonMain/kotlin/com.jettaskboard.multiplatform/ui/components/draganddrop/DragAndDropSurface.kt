@@ -48,7 +48,7 @@ fun DragAndDropSurface(
                             val offset = (state.itemPosition + state.dragOffset)
                             scaleX = 0.9f
                             scaleY = 0.9f
-                            alpha = if (targetSize == IntSize.Zero) 0f else 1f
+                            alpha = if (targetSize == IntSize.Zero) 0f else 0.8f
                             translationX = offset.x.minus(targetSize.width / 2)
                             // 160f is the height adjustment for top app bar, need to find a way to calculate this height
                             translationY = offset.y.minus((targetSize.height / 2 + 160f))
