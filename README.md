@@ -55,8 +55,8 @@ Special thanks to [xxfast/KRouter](https://github.com/xxfast/KRouter) library.
     <th>Board</th>
   </tr>
   <tr>
-    <td><img src = "art/home.png" width=240/></td> 
-    <td><img src = "art/board.png" width=240/></td>
+    <td><img src = "art/home.png" width=360/></td> 
+    <td><img src = "art/board.png" width=360/></td>
   </tr>
 </table>
 
@@ -74,17 +74,9 @@ To run this project, you need the following:
 
 Before you start, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to ensure that your development environment is configured correctly:
 
-1. Install KDoctor with [Homebrew](https://brew.sh/):
+1. Install KDoctor with [Homebrew](https://brew.sh/): ``brew install kdoctor``
 
-    ```text
-    brew install kdoctor
-    ```
-
-2. Run KDoctor in your terminal:
-
-    ```text
-    kdoctor
-    ```
+2. Run KDoctor in your terminal: ``kdoctor``
 
    If everything is set up correctly, you'll see valid output:
 
@@ -105,8 +97,6 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 ## Examine the project structure
 
 Open the project in Android Studio and switch the view from **Android** to **Project** to see all the files and targets belonging to the project:
-
-<img src="readme_images/open_project_view.png" height="300px">
 
 Your Compose Multiplatform project includes 3 modules:
 
