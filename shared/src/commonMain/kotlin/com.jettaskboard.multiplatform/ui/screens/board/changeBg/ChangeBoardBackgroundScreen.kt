@@ -1,6 +1,6 @@
 package com.jettaskboard.multiplatform.ui.screens.board.changeBg
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,7 +15,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jettaskboard.multiplatform.data.util.UnsplashCollection
@@ -29,7 +28,9 @@ fun ChangeBoardBackgroundRoute(
     onImageSelected: (url: String) -> Unit,
     onBackClick: () -> Unit
 ) {
-    val viewModel = rememberViewModel(ChangeBoardBackgroundViewModel::class) { ChangeBoardBackgroundViewModel() }
+    val viewModel = rememberViewModel(ChangeBoardBackgroundViewModel::class) {
+        ChangeBoardBackgroundViewModel()
+    }
     val changingScreenState = viewModel.state.value
     val randomPhotoList = viewModel.randomPhotoList.value
     val scaffoldState = rememberScaffoldState()
@@ -79,6 +80,7 @@ fun ChangeBoardBackgroundRoute(
                                     UnsplashCollection.RANDOM_NATURE_COLLECTION_ID
                                 )
                             }
+
                             ChangeBackgroundScreenState.COLORS_SCREEN -> {
                                 viewModel.generateRandomPhotoList(
                                     UnsplashCollection.RANDOM_COLORS_COLLECTION_ID
@@ -88,6 +90,7 @@ fun ChangeBoardBackgroundRoute(
                         viewModel.changeScreenState(selectedScreenState)
                     }
                 }
+
                 ChangeBackgroundScreenState.PHOTO_SCREEN,
                 ChangeBackgroundScreenState.COLORS_SCREEN -> {
                     Column(modifier = Modifier) {
@@ -98,17 +101,9 @@ fun ChangeBoardBackgroundRoute(
                         }
                         when (randomPhotoList) {
                             UIState.Empty -> {}
-                            is UIState.Failure -> {
-                                // todo - show error
-                            }
                             UIState.Loading -> {
-                                // todo - try `Box` instead of `Column`
-                                Column(
-                                    modifier = modifier
-                                        .fillMaxSize()
-                                        .padding(8.dp),
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
+                                Box(
+                                    modifier = modifier.fillMaxSize().padding(8.dp)
                                 ) {
                                     // todo - not working in desktop
 //                                    TrelloLoadingAnimation(
@@ -116,14 +111,18 @@ fun ChangeBoardBackgroundRoute(
 //                                    )
                                 }
                             }
+
                             is UIState.Success -> {
                                 GridPhotoScreen(
+                                    modifier = Modifier,
                                     photoList = randomPhotoList.data,
                                     onImageSelected = { selectedImageUrl ->
                                         onImageSelected(selectedImageUrl)
                                     }
                                 )
                             }
+
+                            is UIState.Failure -> {}
                         }
                     }
                 }

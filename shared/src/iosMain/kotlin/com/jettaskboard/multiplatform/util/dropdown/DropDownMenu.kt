@@ -13,6 +13,7 @@ actual fun JDropdownMenu(
     content: @Composable () -> Unit
 ) {
     // todo - implementation
+    // Not available in IOS yet: https://stackoverflow.com/questions/71897962/in-compose-multiplatform-dropdownmenu-is-not-available-in-commonmain
 }
 
 @Composable
@@ -22,4 +23,5 @@ actual fun JDropdownMenuItem(
     content: @Composable () -> Unit
 ) {
     // todo - implementation
+    // // Not available in IOS yet
 }

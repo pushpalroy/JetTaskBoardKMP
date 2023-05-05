@@ -1,4 +1,4 @@
-package com.jettaskboard.multiplatform.ui.screens.board
+package com.jettaskboard.multiplatform.ui.components.board.menu.slide
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TaskBoardExpandedScreenDrawerItem(
+fun SlideMenuItem(
     title: String = "Change Background",
     icon: Painter,
     onItemClickListener: (String) -> Unit

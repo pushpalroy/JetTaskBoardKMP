@@ -44,7 +44,7 @@ fun Board(
     modifier: Modifier = Modifier,
     lists: List<ListModel>,
     onAddNewCardClicked: (Int) -> Unit,
-    onTaskCardEdited: (Int, Int, String) -> Unit,
+    onCardEditDone: (Int, Int, String) -> Unit,
     onAddNewListClicked: () -> Unit,
     navigateToCreateCard: (String) -> Unit,
     onCardMovedToDifferentList: (Int, Int, Int) -> Unit,
@@ -75,9 +75,9 @@ fun Board(
                     boardState = boardState,
                     listModel = list,
                     isExpandedScreen = isExpandedScreen,
-                    onTaskCardClick = navigateToCreateCard,
+                    onCardClick = navigateToCreateCard,
                     onAddCardClick = { onAddNewCardClicked(list.id) },
-                    onTaskCardEditDone = onTaskCardEdited,
+                    onCardEditDone = onCardEditDone,
                     saveClicked = saveClicked
                 )
             }
@@ -95,8 +95,8 @@ fun Board(
 fun Lists(
     boardState: DragAndDropState,
     listModel: ListModel,
-    onTaskCardClick: (String) -> Unit,
-    onTaskCardEditDone: (Int, Int, String) -> Unit,
+    onCardClick: (String) -> Unit,
+    onCardEditDone: (Int, Int, String) -> Unit,
     onAddCardClick: () -> Unit,
     saveClicked: Boolean,
     isExpandedScreen: Boolean
@@ -124,8 +124,8 @@ fun Lists(
             ListBody(
                 modifier = Modifier,
                 listModel = listModel,
-                onTaskCardClick = onTaskCardClick,
-                onTaskCardEditDone = onTaskCardEditDone,
+                onTaskCardClick = onCardClick,
+                onTaskCardEditDone = onCardEditDone,
                 onAddCardClick = onAddCardClick,
                 isExpandedScreen = isExpandedScreen,
                 saveClicked = saveClicked
