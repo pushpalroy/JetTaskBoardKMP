@@ -23,7 +23,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
@@ -33,9 +35,8 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.rememberWindowState
+import com.jettaskboard.multiplatform.util.screenHeight.screenHeight
 import kotlinx.coroutines.delay
 import kotlin.math.absoluteValue
 import kotlin.math.max
@@ -69,8 +70,6 @@ fun TargetContent(
     target: IntroShowcaseTargets,
     onShowcaseCompleted: () -> Unit
 ) {
-    val windowState = rememberWindowState(size = DpSize(1200.dp, 800.dp))
-    val screenHeight = windowState.size.height.value
     val targetCords = target.coordinates
     val gutterArea = 88.dp
     val targetRect = targetCords.boundsInRoot()
@@ -79,7 +78,7 @@ fun TargetContent(
         targetCords.positionInRoot().y.toDp()
     }
 
-    val isTargetInGutter = gutterArea > yOffset || yOffset > screenHeight.dp.minus(gutterArea)
+    val isTargetInGutter = gutterArea > yOffset || yOffset > screenHeight().dp.minus(gutterArea)
 
     val maxDimension =
         max(targetCords.size.width.absoluteValue, targetCords.size.height.absoluteValue)
@@ -132,8 +131,8 @@ fun TargetContent(
             modifier = Modifier
                 .fillMaxSize()
                 .pointerInput(target) {
-                    detectTapGestures { tapOffeset ->
-                        if (targetRect.contains(tapOffeset)) {
+                    detectTapGestures { tapOffset ->
+                        if (targetRect.contains(tapOffset)) {
                             onShowcaseCompleted()
                         }
                     }
@@ -148,20 +147,11 @@ fun TargetContent(
                 alpha = target.style.backgroundAlpha
             )
 
-            dys.forEach { dy ->
-                drawCircle(
-                    color = target.style.targetCircleColor,
-                    radius = maxDimension * dy * 2f,
-                    center = targetRect.center,
-                    alpha = 1 - dy
-                )
-            }
-
-            drawCircle(
+            drawRect(
                 color = target.style.targetCircleColor,
-                radius = targetRadius,
-                center = targetRect.center,
-                blendMode = BlendMode.Xor
+                topLeft = targetRect.topLeft.copy(y = targetRect.top - 110),
+                blendMode = BlendMode.Xor,
+                size = Size(570f, 200f)
             )
         }
 

@@ -26,9 +26,14 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jettaskboard.multiplatform.domain.model.ListModel
@@ -38,7 +43,8 @@ import com.jettaskboard.multiplatform.ui.components.draganddrop.DragAndDropSurfa
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DragSurface
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DropSurface
 import com.jettaskboard.multiplatform.ui.theme.SecondaryColor
-import com.jettaskboard.multiplatform.util.insetsx.imePadding
+import com.jettaskboard.multiplatform.util.showcase.IntroShowCaseScaffold
+import com.jettaskboard.multiplatform.util.showcase.ShowcaseStyle
 
 @Composable
 fun Board(
@@ -53,6 +59,7 @@ fun Board(
     isExpandedScreen: Boolean = false
 ) {
     val boardState = remember { DragAndDropState(isExpandedScreen) }
+    var showEditOverlayForDesktop by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = boardState.movingCardData) {
         if (boardState.hasCardMoved()) {
@@ -64,29 +71,59 @@ fun Board(
         }
     }
 
-    DragAndDropSurface(
-        modifier = modifier.fillMaxSize(),
-        state = boardState
+    IntroShowCaseScaffold(
+        showIntroShowCase = showEditOverlayForDesktop,
+        onShowCaseCompleted = {
+            showEditOverlayForDesktop = false
+        },
     ) {
-        LazyRow(
-            modifier = Modifier.fillMaxWidth()
+        DragAndDropSurface(
+            modifier = modifier.fillMaxSize(),
+            state = boardState
         ) {
-            items(lists) { list ->
-                Lists(
-                    boardState = boardState,
-                    listModel = list,
-                    isExpandedScreen = isExpandedScreen,
-                    onCardClick = navigateToCreateCard,
-                    onAddCardClick = { onAddNewCardClicked(list.id) },
-                    onCardEditDone = onCardEditDone,
-                    saveClicked = saveClicked
-                )
-            }
-            item {
-                AddNewListButton(
-                    onClick = onAddNewListClicked,
-                    isExpandedScreen = isExpandedScreen
-                )
+            LazyRow(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                items(lists) { list ->
+                    Lists(
+                        boardState = boardState,
+                        listModel = list,
+                        isExpandedScreen = isExpandedScreen,
+                        onCardClick = navigateToCreateCard,
+                        onAddCardClick = {
+                            showEditOverlayForDesktop = true
+                            onAddNewCardClicked(list.id)
+                        },
+                        onCardEditDone = onCardEditDone,
+                        saveClicked = saveClicked,
+                        showcaseModifier = Modifier.introShowCaseTarget(
+                            index = 0,
+                            style = ShowcaseStyle.Default.copy(
+                                backgroundColor = Color(0xFF7C99AC),
+                                backgroundAlpha = 0.90f,
+                                targetCircleColor = Color.White
+                            ),
+                            content = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Column {
+                                        Text(
+                                            text = "Save",
+                                            color = Color.White,
+                                            fontSize = 16.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                }
+                            }
+                        ),
+                    )
+                }
+                item {
+                    AddNewListButton(
+                        onClick = onAddNewListClicked,
+                        isExpandedScreen = isExpandedScreen
+                    )
+                }
             }
         }
     }
@@ -100,7 +137,8 @@ fun Lists(
     onCardEditDone: (Int, Int, String) -> Unit,
     onAddCardClick: () -> Unit,
     saveClicked: Boolean,
-    isExpandedScreen: Boolean
+    isExpandedScreen: Boolean,
+    showcaseModifier: Modifier = Modifier
 ) {
     DropSurface(
         modifier = Modifier
@@ -124,6 +162,7 @@ fun Lists(
             )
             ListBody(
                 modifier = Modifier,
+                showcaseModifier = showcaseModifier,
                 listModel = listModel,
                 onTaskCardClick = onCardClick,
                 onTaskCardEditDone = onCardEditDone,
@@ -139,6 +178,7 @@ fun Lists(
 @Composable
 fun ListBody(
     modifier: Modifier,
+    showcaseModifier: Modifier = Modifier,
     listModel: ListModel,
     onTaskCardClick: (String) -> Unit,
     onTaskCardEditDone: (Int, Int, String) -> Unit,
@@ -147,14 +187,14 @@ fun ListBody(
     isExpandedScreen: Boolean
 ) {
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
     ) {
         items(
             items = listModel.cards,
             key = { card -> card.id }
         ) { card ->
             DragSurface(
-                modifier = modifier
+                modifier = showcaseModifier
                     .fillMaxWidth()
                     .animateItemPlacement(),
                 cardId = card.id,
