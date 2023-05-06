@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun TaskBoardAppBar(
+    modifier: Modifier = Modifier,
     isExpandedScreen: Boolean = false,
     onBackClick: () -> Unit,
     onSaveClicked: () -> Unit,
@@ -30,6 +31,7 @@ fun TaskBoardAppBar(
     var displayDropDownMenu by remember { mutableStateOf(false) }
 
     TopAppBar(
+        modifier = modifier,
         navigationIcon = {
             IconButton(
                 onClick = onBackClick

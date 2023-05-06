@@ -7,11 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.DrawerState
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.FabPosition
@@ -41,9 +45,12 @@ import com.jettaskboard.multiplatform.ui.components.multifab.MultiFloatingAction
 import com.jettaskboard.multiplatform.ui.screens.dashboard.content.DashboardSinglePaneContent
 import com.jettaskboard.multiplatform.ui.screens.dashboard.content.DashboardTwoPaneContent
 import com.jettaskboard.multiplatform.ui.screens.dashboard.drawer.JtbDrawer
+import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
+import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
 fun DashboardRoute(
     modifier: Modifier = Modifier,
@@ -71,7 +78,9 @@ fun DashboardRoute(
 
         Scaffold(
             scaffoldState = scaffoldState,
-            modifier = Modifier,
+            modifier = Modifier.windowInsetsPadding(
+                WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+            ),
             topBar = {
                 DashboardAppBar(
                     isExpandedScreen = isExpandedScreen,
@@ -118,7 +127,9 @@ fun DashboardRoute(
                     stiffness = Spring.StiffnessLow
                 )
             )
-            Row(Modifier.fillMaxSize()) {
+            Row(
+                modifier = Modifier.fillMaxSize()
+            ) {
                 // Show permanent drawer only for large screens
                 if (isExpandedScreen) {
                     Column(

@@ -78,31 +78,6 @@ fun Zoomable(
     var dragOffset by remember { mutableStateOf(Offset.Zero) }
     var transformOffset by remember { mutableStateOf(Offset.Zero) }
 
-//    val doubleTapFunction = onDoubleTap ?: {
-//        if (zoomableState.scale.value != 1f) {
-//            coroutineScope.launch {
-//                zoomableState.animateBy(
-//                    zoomChange = 1 / zoomableState.scale.value,
-//                    panChange = -zoomableState.offset.value,
-//                    rotationChange = -zoomableState.rotation.value
-//                )
-//            }
-//            Unit
-//        } else {
-//            if (zoomableState.scale.value == 1f) {
-//                coroutineScope.launch {
-//                    zoomableState.animateZoomToPosition(
-//                        zoomChange = 1.2f,
-//                        position = Offset.Zero,
-//                        currentComposableCenter = composableCenter
-//                    )
-//
-//                }
-//            }
-//            Unit
-//        }
-//    }
-
     fun onTransformGesture(
         centroid: Offset,
         pan: Offset,

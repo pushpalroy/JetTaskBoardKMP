@@ -19,7 +19,9 @@ import androidx.compose.ui.geometry.Offset
 import com.jettaskboard.multiplatform.ui.components.zoomable.ZoomableState.Rotation.ALWAYS_ENABLED
 import com.jettaskboard.multiplatform.ui.components.zoomable.ZoomableState.Rotation.DISABLED
 import com.jettaskboard.multiplatform.ui.components.zoomable.ZoomableState.Rotation.LOCK_ROTATION_ON_ZOOM_PAN
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlin.math.atan
 import kotlin.math.cos
 import kotlin.math.sin
@@ -200,5 +202,29 @@ fun rememberZoomableState(
             rotationBehavior,
             lambdaState.value::invoke
         )
+    }
+}
+
+fun ZoomableState.zoomIn(coroutineScope: CoroutineScope, boardCenterOffset: Offset) {
+    if (scale.value == 1f) {
+        coroutineScope.launch {
+            animateZoomToPosition(
+                zoomChange = 1.2f,
+                position = Offset.Zero,
+                currentComposableCenter = boardCenterOffset
+            )
+        }
+    }
+}
+
+fun ZoomableState.zoomOut(coroutineScope: CoroutineScope) {
+    if (scale.value != 1f) {
+        coroutineScope.launch {
+            animateBy(
+                zoomChange = 1 / scale.value,
+                panChange = -offset.value,
+                rotationChange = -rotation.value
+            )
+        }
     }
 }
