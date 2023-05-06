@@ -118,7 +118,7 @@ fun TaskBoardRoute(
                     imageUrl = boardBackground,
                     contentDescription = "Board background",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.matchParentSize(),
+                    modifier = Modifier.fillMaxSize(),
                     loadingPlaceholder = {}
                 )
 
