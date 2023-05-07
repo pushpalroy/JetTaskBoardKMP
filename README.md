@@ -46,6 +46,7 @@ JetTaskBoardKMP follows the principles of Clean Architecture.
 | 🌐  Networking        |                    [KTor](https://github.com/ktorio/ktor)                     |
 | 🧶  Multi-threading   |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
 | 📼  Persistence       | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
+| 📼  Window Insets     |              [InsetsX](https://github.com/mori-atsushi/insetsx)               |
 | 🔍  Zooming Behaviour |               [Zoomables](https://github.com/Mr-Pine/Zoomables)               |
 
 ### 🖥️  Screenshots
