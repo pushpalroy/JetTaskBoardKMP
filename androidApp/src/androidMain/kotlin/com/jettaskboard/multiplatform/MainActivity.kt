@@ -1,4 +1,4 @@
-package com.myapplication
+package com.jettaskboard.multiplatform
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
