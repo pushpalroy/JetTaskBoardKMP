@@ -29,6 +29,16 @@
 
 <video src="https://user-images.githubusercontent.com/19844292/236077021-fa5c8b68-a9e2-4c82-942c-dc3500b5b7b7.mp4"></video>
 
+### ⚽ Features
+
+* Dashboard - View different workspaces
+* Create board/card from dashboard
+* Board - Drag and Drop support
+* Change board background - Uses [Unsplash API](https://unsplash.com/developers)
+* Board background search feature
+* Add list in Board
+* Add card in Board and quick edit
+
 ### ⚒️ Architecture
 
 JetTaskBoardKMP follows the principles of Clean Architecture.
@@ -46,6 +56,7 @@ JetTaskBoardKMP follows the principles of Clean Architecture.
 | 🌐  Networking        |                    [KTor](https://github.com/ktorio/ktor)                     |
 | 🧶  Multi-threading   |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
 | 📼  Persistence       | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
+| 📐  Window Insets     |              [InsetsX](https://github.com/mori-atsushi/insetsx)               |
 | 🔍  Zooming Behaviour |               [Zoomables](https://github.com/Mr-Pine/Zoomables)               |
 
 ### 🖥️  Screenshots

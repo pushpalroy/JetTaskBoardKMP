@@ -2,8 +2,12 @@ package com.jettaskboard.multiplatform.ui.screens.board.changeBg
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -20,8 +24,11 @@ import androidx.compose.ui.unit.dp
 import com.jettaskboard.multiplatform.data.util.UnsplashCollection
 import com.jettaskboard.multiplatform.ui.components.search.SearchComponent
 import com.jettaskboard.multiplatform.ui.util.UIState
+import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
+import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
 
+@OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
 fun ChangeBoardBackgroundRoute(
     modifier: Modifier = Modifier,
@@ -37,6 +44,9 @@ fun ChangeBoardBackgroundRoute(
     val textSearch by viewModel.textSearch.collectAsState()
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(
+            WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+        ),
         scaffoldState = scaffoldState,
         topBar = {
             androidx.compose.material.TopAppBar(

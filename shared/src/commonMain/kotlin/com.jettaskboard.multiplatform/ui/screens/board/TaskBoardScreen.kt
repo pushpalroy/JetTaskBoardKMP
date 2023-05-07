@@ -4,8 +4,12 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -28,13 +32,17 @@ import com.jettaskboard.multiplatform.ui.components.board.Board
 import com.jettaskboard.multiplatform.ui.components.board.menu.slide.SlideMenu
 import com.jettaskboard.multiplatform.ui.components.zoomable.Zoomable
 import com.jettaskboard.multiplatform.ui.components.zoomable.rememberZoomableState
+import com.jettaskboard.multiplatform.ui.components.zoomable.zoomIn
+import com.jettaskboard.multiplatform.ui.components.zoomable.zoomOut
 import com.jettaskboard.multiplatform.ui.screens.board.appBar.TaskBoardAppBar
 import com.jettaskboard.multiplatform.ui.screens.board.fab.TaskBoardZoomOptions
 import com.jettaskboard.multiplatform.ui.theme.DefaultTaskBoardBGColor
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
+import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
+import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
-import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
 fun TaskBoardRoute(
     modifier: Modifier = Modifier,
@@ -69,6 +77,9 @@ fun TaskBoardRoute(
     }
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(
+            WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+        ),
         scaffoldState = scaffoldState,
         topBar = {
             TaskBoardAppBar(
@@ -85,26 +96,10 @@ fun TaskBoardRoute(
             TaskBoardZoomOptions(
                 modifier = Modifier,
                 onZoomIn = {
-                    if (zoomableState.scale.value == 1f) {
-                        coroutineScope.launch {
-                            zoomableState.animateZoomToPosition(
-                                zoomChange = 1.2f,
-                                position = Offset.Zero,
-                                currentComposableCenter = boardCenterOffset
-                            )
-                        }
-                    }
+                    zoomableState.zoomIn(coroutineScope, boardCenterOffset)
                 },
                 onZoomOut = {
-                    if (zoomableState.scale.value != 1f) {
-                        coroutineScope.launch {
-                            zoomableState.animateBy(
-                                zoomChange = 1 / zoomableState.scale.value,
-                                panChange = -zoomableState.offset.value,
-                                rotationChange = -zoomableState.rotation.value
-                            )
-                        }
-                    }
+                    zoomableState.zoomOut(coroutineScope)
                 }
             )
         }
@@ -123,7 +118,7 @@ fun TaskBoardRoute(
                     imageUrl = boardBackground,
                     contentDescription = "Board background",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.matchParentSize(),
+                    modifier = Modifier.fillMaxSize(),
                     loadingPlaceholder = {}
                 )
 
@@ -134,21 +129,9 @@ fun TaskBoardRoute(
                     onComposableCenterShift = { boardCenterOffset = it },
                     onDoubleTap = {
                         if (zoomableState.scale.value == 1f) {
-                            coroutineScope.launch {
-                                zoomableState.animateZoomToPosition(
-                                    zoomChange = 1.2f,
-                                    position = Offset.Zero,
-                                    currentComposableCenter = boardCenterOffset
-                                )
-                            }
+                            zoomableState.zoomIn(coroutineScope, boardCenterOffset)
                         } else if (zoomableState.scale.value != 1f) {
-                            coroutineScope.launch {
-                                zoomableState.animateBy(
-                                    zoomChange = 1 / zoomableState.scale.value,
-                                    panChange = -zoomableState.offset.value,
-                                    rotationChange = -zoomableState.rotation.value
-                                )
-                            }
+                            zoomableState.zoomOut(coroutineScope)
                         }
                     }
                 ) {

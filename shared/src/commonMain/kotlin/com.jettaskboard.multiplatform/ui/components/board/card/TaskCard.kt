@@ -2,7 +2,15 @@ package com.jettaskboard.multiplatform.ui.components.board.card
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -24,8 +32,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jettaskboard.multiplatform.domain.model.CardModel
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
+import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
+import com.jettaskboard.multiplatform.util.insetsx.imePadding
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
 fun TaskCard(
     modifier: Modifier = Modifier,
@@ -100,6 +111,7 @@ fun TaskCard(
 
                 if (editModeEnabled) {
                     TextField(
+                        modifier = Modifier.imePadding(),
                         value = editedTitle.value,
                         onValueChange = { editedTitle.value = it }
                     )

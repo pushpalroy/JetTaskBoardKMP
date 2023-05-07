@@ -38,6 +38,7 @@ import com.jettaskboard.multiplatform.ui.components.draganddrop.DragAndDropSurfa
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DragSurface
 import com.jettaskboard.multiplatform.ui.components.draganddrop.DropSurface
 import com.jettaskboard.multiplatform.ui.theme.SecondaryColor
+import com.jettaskboard.multiplatform.util.insetsx.imePadding
 
 @Composable
 fun Board(
