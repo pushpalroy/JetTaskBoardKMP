@@ -37,7 +37,7 @@
 
 ### Add and archive card
 
-<img src = "art/board_add_archive_card.gif" width="100%"/>
+<img src = "art/board_add_archive_card.gif"/>
 
 ### 👾 Features
 
