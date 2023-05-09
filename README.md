@@ -11,8 +11,6 @@
       <a href="https://kotlinlang.org/docs/releases.html">
         <img src="https://img.shields.io/badge/Kotlin-1.8.20-blue.svg?color=blue&style=for-the-badge"/>
       </a>
-  </p>
-<p align="left">
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/stargazers">
         <img src="https://img.shields.io/github/stars/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
       </a>
@@ -21,6 +19,9 @@
       </a>
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/watchers">
           <img src="https://img.shields.io/github/watchers/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
+      </a>
+      <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/pulls">
+         <img src="https://img.shields.io/github/issues-pr/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" alt="Pull Requests Badge"/>
       </a>
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/issues">
           <img src="https://img.shields.io/github/issues/pushpalroy/JetTaskBoardKMP?color=orange&style=for-the-badge" />
