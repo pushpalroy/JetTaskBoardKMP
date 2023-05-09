@@ -29,6 +29,10 @@
 
 <img src = "art/board_card_move.gif" width="100%"/>
 
+### Change board background
+
+<img src = "art/board_change_bg.gif" width="100%"/>
+
 ### ⚽ Features
 
 * Dashboard - View different workspaces
