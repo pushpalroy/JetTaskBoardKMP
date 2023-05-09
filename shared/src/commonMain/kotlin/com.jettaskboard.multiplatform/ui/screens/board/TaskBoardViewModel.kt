@@ -87,6 +87,11 @@ class TaskBoardViewModel : ViewModel() {
         )
     }
 
+    fun removeCardFromList(cardId: Int, listId: Int) = CoroutineScope(coroutineContext).launch {
+        _lists.find { it.id == listId }?.cards?.removeAll { it.id == cardId }
+        totalCards -= 1
+    }
+
     fun editCardInList(cardId: Int, listId: Int, title: String) =
         CoroutineScope(coroutineContext).launch {
             // Locate the card to be edited

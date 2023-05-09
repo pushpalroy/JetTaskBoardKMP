@@ -141,6 +141,9 @@ fun TaskBoardRoute(
                         onCardMovedToDifferentList = { cardId, oldListId, newListId ->
                             viewModel.moveCardToDifferentList(cardId, oldListId, newListId)
                         },
+                        onCardRemovedFromList = { cardId, listId ->
+                            viewModel.removeCardFromList(cardId, listId)
+                        },
                         boardState = boardState,
                         navigateToCreateCard = navigateToCreateCard,
                         isExpandedScreen = isExpandedScreen,

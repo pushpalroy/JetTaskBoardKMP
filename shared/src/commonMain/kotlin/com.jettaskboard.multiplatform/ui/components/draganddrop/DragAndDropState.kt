@@ -21,6 +21,11 @@ class DragAndDropState constructor(
     var isDragging by mutableStateOf(false)
 
     /**
+     * Whether a card has been archived
+     */
+    var isArchived by mutableStateOf(false)
+
+    /**
      * Current position of the item to be dragged
      */
     var itemPosition by mutableStateOf(Offset.Zero)

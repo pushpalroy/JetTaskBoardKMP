@@ -71,8 +71,7 @@ fun DragSurface(
     modifier: Modifier,
     cardId: Int = 0,
     cardListId: Int = 0,
-    content: @Composable
-        () -> Unit
+    content: @Composable () -> Unit
 ) {
     val dragNDropState = LocalDragAndDropState.current
     var currentPosition by remember { mutableStateOf(Offset.Zero) }
@@ -191,7 +190,7 @@ fun ArchiveDropSurface(
 
                 // Changing list id when card moved from one list to another
                 if (isCurrentDropTarget) {
-                    //dragNDropState.listIdWithCardInBounds = listId
+                    dragNDropState.isArchived = true
                 }
             }
         }

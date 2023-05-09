@@ -35,6 +35,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -51,18 +52,19 @@ import com.jettaskboard.multiplatform.ui.screens.board.appBar.TaskBoardAppBar
 @Composable
 fun Board(
     modifier: Modifier = Modifier,
+    title: String,
     lists: List<ListModel>,
-    onAddNewCardClicked: (Int) -> Unit,
+    onCardMovedToDifferentList: (Int, Int, Int) -> Unit,
+    onCardRemovedFromList: (Int, Int) -> Unit,
     onCardEditDone: (Int, Int, String) -> Unit,
+    onAddNewCardClicked: (Int) -> Unit,
     onAddNewListClicked: () -> Unit,
     navigateToCreateCard: (String) -> Unit,
-    onCardMovedToDifferentList: (Int, Int, Int) -> Unit,
     saveClicked: Boolean,
     boardState: DragAndDropState,
     isExpandedScreen: Boolean = false,
     onBackClick: () -> Unit,
     onSaveClicked: () -> Unit,
-    title: String,
     editModeEnabled: Boolean,
     navigateToChangeBgScreen: (String) -> Unit,
     onHamBurgerMenuClick: () -> Unit = {}
@@ -74,6 +76,12 @@ fun Board(
                 boardState.cardDraggedInitialListId,
                 boardState.movingCardData.second
             )
+        }
+    }
+    LaunchedEffect(boardState.isArchived, boardState.dragOffset) {
+        if (boardState.isArchived && boardState.dragOffset == Offset.Zero) {
+            onCardRemovedFromList(boardState.cardDraggedId, boardState.listIdWithCardInBounds)
+            boardState.isArchived = false
         }
     }
     DragAndDropSurface(
