@@ -1,7 +1,4 @@
-rootProject.name = "JetTaskBoardKMM"
-
-include(":androidApp")
-include(":shared")
+rootProject.name = "JetTaskBoardKMP"
 
 pluginManagement {
     repositories {
@@ -18,10 +15,9 @@ pluginManagement {
         kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
         kotlin("android").version(kotlinVersion)
-
+        id("com.android.base").version(agpVersion)
         id("com.android.application").version(agpVersion)
         id("com.android.library").version(agpVersion)
-
         id("org.jetbrains.compose").version(composeVersion)
     }
 }
@@ -33,3 +29,7 @@ dependencyResolutionManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
+
+include(":androidApp")
+include(":desktopApp")
+include(":shared")

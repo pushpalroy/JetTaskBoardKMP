@@ -8,11 +8,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.jettaskboard.multiplatform.ui.components.loading.TrelloNotificationAnimationIcon
 
 @Composable
 fun DashboardAppBar(
+    modifier: Modifier = Modifier,
     isExpandedScreen: Boolean,
     onMenuIconClick: () -> Unit,
     onSearchIconClicked: () -> Unit,
@@ -20,6 +22,7 @@ fun DashboardAppBar(
     notificationCount: Int = 0
 ) {
     TopAppBar(
+        modifier = modifier,
         title = {
             Text(text = "Boards")
         },

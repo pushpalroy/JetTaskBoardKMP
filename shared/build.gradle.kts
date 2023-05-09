@@ -100,7 +100,6 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
-                implementation(compose.desktop.currentOs)
                 implementation("io.ktor:ktor-client-okhttp:2.3.0")
                 implementation("org.slf4j:slf4j-simple:2.0.7")
             }
@@ -127,17 +126,5 @@ android {
     }
     kotlin {
         jvmToolchain(11)
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.jettaskboard.multiplatform.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.jettaskboard.mutiplatform"
-            packageVersion = "1.0.0"
-        }
     }
 }

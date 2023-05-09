@@ -52,12 +52,16 @@ class TaskBoardViewModel : ViewModel() {
             preferences.updateBoardBackground(imageUri)
         }
 
+    init {
+        getBoardData()
+    }
+
     /**
      * A Board has a list of Lists: Board = f(List)
      * A List has a list of Cards: List = f(Card)
      * A new Card has to be inserted in the list Cards of a Board
      */
-    fun getBoardData() = CoroutineScope(coroutineContext).launch {
+    private fun getBoardData() = CoroutineScope(coroutineContext).launch {
         // Trigger repository requests in parallel
         val boardDeferred = async { getFakeBoard() }
 
@@ -79,9 +83,28 @@ class TaskBoardViewModel : ViewModel() {
         totalCards += 1
         val newCardIndex = totalCards
         _lists.find { it.id == listId }?.cards?.add(
-            CardModel(id = newCardIndex, title = "New Card", listId = listId)
+            CardModel(id = newCardIndex, title = "", listId = listId)
         )
     }
+
+    fun editCardInList(cardId: Int, listId: Int, title: String) =
+        CoroutineScope(coroutineContext).launch {
+            // Locate the card to be edited
+            val cardToEdit = _lists.find { it.id == listId }?.cards?.find { it.id == cardId }
+            cardToEdit?.let { safeCardToEdit ->
+                // Remove card from list
+                _lists.find { it.id == listId }?.cards?.removeAll { it.id == cardId }
+                totalCards -= 1
+                // Place a copy of same card with new added data to the same list
+                _lists.find { it.id == listId }?.cards?.add(
+                    safeCardToEdit.copy(
+                        listId = listId,
+                        title = title
+                    )
+                )
+                totalCards += 1
+            }
+        }
 
     fun moveCardToDifferentList(
         cardId: Int,
@@ -95,7 +118,9 @@ class TaskBoardViewModel : ViewModel() {
         // Basically, modifying the internal data of two list-items simultaneously
         cardToMove?.let { safeCard ->
             _lists.find { it.id == oldListId }?.cards?.removeAll { it.id == safeCard.id }
+            totalCards -= 1
             _lists.find { it.id == newListId }?.cards?.add(safeCard.copy(listId = newListId))
+            totalCards += 1
         }
     }
 

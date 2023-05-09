@@ -1,9 +1,13 @@
 package com.jettaskboard.multiplatform.ui.screens.board.changeBg
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -15,27 +19,34 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jettaskboard.multiplatform.data.util.UnsplashCollection
 import com.jettaskboard.multiplatform.ui.components.search.SearchComponent
 import com.jettaskboard.multiplatform.ui.util.UIState
+import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
+import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
 
+@OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
 fun ChangeBoardBackgroundRoute(
     modifier: Modifier = Modifier,
     onImageSelected: (url: String) -> Unit,
     onBackClick: () -> Unit
 ) {
-    val viewModel = rememberViewModel(ChangeBoardBackgroundViewModel::class) { ChangeBoardBackgroundViewModel() }
+    val viewModel = rememberViewModel(ChangeBoardBackgroundViewModel::class) {
+        ChangeBoardBackgroundViewModel()
+    }
     val changingScreenState = viewModel.state.value
     val randomPhotoList = viewModel.randomPhotoList.value
     val scaffoldState = rememberScaffoldState()
     val textSearch by viewModel.textSearch.collectAsState()
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(
+            WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+        ),
         scaffoldState = scaffoldState,
         topBar = {
             androidx.compose.material.TopAppBar(
@@ -79,6 +90,7 @@ fun ChangeBoardBackgroundRoute(
                                     UnsplashCollection.RANDOM_NATURE_COLLECTION_ID
                                 )
                             }
+
                             ChangeBackgroundScreenState.COLORS_SCREEN -> {
                                 viewModel.generateRandomPhotoList(
                                     UnsplashCollection.RANDOM_COLORS_COLLECTION_ID
@@ -88,6 +100,7 @@ fun ChangeBoardBackgroundRoute(
                         viewModel.changeScreenState(selectedScreenState)
                     }
                 }
+
                 ChangeBackgroundScreenState.PHOTO_SCREEN,
                 ChangeBackgroundScreenState.COLORS_SCREEN -> {
                     Column(modifier = Modifier) {
@@ -98,17 +111,9 @@ fun ChangeBoardBackgroundRoute(
                         }
                         when (randomPhotoList) {
                             UIState.Empty -> {}
-                            is UIState.Failure -> {
-                                // todo - show error
-                            }
                             UIState.Loading -> {
-                                // todo - try `Box` instead of `Column`
-                                Column(
-                                    modifier = modifier
-                                        .fillMaxSize()
-                                        .padding(8.dp),
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
+                                Box(
+                                    modifier = modifier.fillMaxSize().padding(8.dp)
                                 ) {
                                     // todo - not working in desktop
 //                                    TrelloLoadingAnimation(
@@ -116,14 +121,18 @@ fun ChangeBoardBackgroundRoute(
 //                                    )
                                 }
                             }
+
                             is UIState.Success -> {
                                 GridPhotoScreen(
+                                    modifier = Modifier,
                                     photoList = randomPhotoList.data,
                                     onImageSelected = { selectedImageUrl ->
                                         onImageSelected(selectedImageUrl)
                                     }
                                 )
                             }
+
+                            is UIState.Failure -> {}
                         }
                     }
                 }

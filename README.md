@@ -2,7 +2,7 @@
 
   <p align="left"> A clone of Trello app built using Compose Multiplatform for Android, iOS and Desktop.</p>
 
-   This app was previously written in Jetpack Compose for Android in [JetTaskBoard](https://github.com/pushpalroy/jetTaskBoard). It is now re-written using multiplatform.
+   This app was previously written in Jetpack Compose for Android in [JetTaskBoard](https://github.com/pushpalroy/jetTaskBoard). Now, it has been migrated to multiplatform.
 
   <p align="left">
       <a href = "https://github.com/JetBrains/compose-multiplatform/releases">
@@ -29,23 +29,35 @@
 
 <video src="https://user-images.githubusercontent.com/19844292/236077021-fa5c8b68-a9e2-4c82-942c-dc3500b5b7b7.mp4"></video>
 
+### ⚽ Features
+
+* Dashboard - View different workspaces
+* Create board/card from dashboard
+* Board - Drag and Drop support
+* Change board background - Uses [Unsplash API](https://unsplash.com/developers)
+* Board background search feature
+* Add list in Board
+* Add card in Board and quick edit
+
 ### ⚒️ Architecture
 
 JetTaskBoardKMP follows the principles of Clean Architecture.
 
 ### 👨‍💻 Tech stack
 
-| Tools               |                                     Link                                      |
-|:--------------------|:-----------------------------------------------------------------------------:|
-| 🤖 Language         |                       [Kotlin](https://kotlinlang.org)                        |
-| 💚 Framework        |  [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform)  |
-| 🏛 Lifecycle        |                [Essenty](https://github.com/arkivanov/Essenty)                |
-| 💉 State Management |              [Decompose](https://github.com/arkivanov/decompose)              |
-| 🌐 Networking       |                    [KTor](https://github.com/ktorio/ktor)                     |
-| 🌊 Multi-threading  |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
-| 🪟 Persistence      | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
-
-Special thanks to [xxfast/KRouter](https://github.com/xxfast/KRouter) library.
+| Tools                 |                                     Link                                      |
+|:----------------------|:-----------------------------------------------------------------------------:|
+| 🤖  Language          |                       [Kotlin](https://kotlinlang.org)                        |
+| 🩶  Framework         |  [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform)  |
+| 🕜  Lifecycle         |                [Essenty](https://github.com/arkivanov/Essenty)                |
+| 📁  State Management  |              [Decompose](https://github.com/arkivanov/decompose)              |
+| 💉  DI                |          [Koin](https://insert-koin.io/docs/reference/koin-mp/kmp/)           |
+| 🧭  Navigation        |              [xxfast/KRouter](https://github.com/xxfast/KRouter)              |
+| 🌐  Networking        |                    [KTor](https://github.com/ktorio/ktor)                     |
+| 🧶  Multi-threading   |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)      |
+| 📼  Persistence       | [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) |
+| 📐  Window Insets     |              [InsetsX](https://github.com/mori-atsushi/insetsx)               |
+| 🔍  Zooming Behaviour |               [Zoomables](https://github.com/Mr-Pine/Zoomables)               |
 
 ### 🖥️  Screenshots
 

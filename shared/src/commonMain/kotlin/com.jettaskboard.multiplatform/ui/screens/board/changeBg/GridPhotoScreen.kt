@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun GridPhotoScreen(
+    modifier: Modifier = Modifier,
     photoList: List<ChangeBackgroundPhotoModel> = emptyList(),
     onImageSelected: (url: String) -> Unit,
 ) {
@@ -29,8 +30,7 @@ fun GridPhotoScreen(
     val scope = rememberCoroutineScope()
 
     LazyVerticalGrid(
-        modifier = Modifier
-            .padding(top = 4.dp, bottom = 8.dp),
+        modifier = modifier.padding(top = 4.dp, bottom = 8.dp),
         columns = GridCells.Adaptive(minSize = 150.dp),
         contentPadding = PaddingValues(4.dp)
     ) {

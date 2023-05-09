@@ -11,6 +11,8 @@ object Constants {
     const val PARAM_QUERY = "query"
     const val PARAM_QUERY_COUNT = "count"
     const val PARAM_QUERY_COLLECTION = "collection"
+
+    const val DEFAULT_BOARD_BG = "https://images.unsplash.com/photo-1523895665936-7bfe172b757d"
 }
 
 object UnsplashCollection {

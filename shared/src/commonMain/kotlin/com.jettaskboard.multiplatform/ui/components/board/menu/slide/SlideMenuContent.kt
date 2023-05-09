@@ -1,4 +1,4 @@
-package com.jettaskboard.multiplatform.ui.screens.board
+package com.jettaskboard.multiplatform.ui.components.board.menu.slide
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -10,7 +10,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun TaskBoardExpandedScreenDrawer(
+fun SlideMenuContent(
     navigateToChangeBackgroundRoute: (String) -> Unit,
     navigateToFilterRoute: () -> Unit = {},
     navigateToAutomationRoute: () -> Unit = {},
@@ -20,21 +20,21 @@ fun TaskBoardExpandedScreenDrawer(
         modifier = Modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        TaskBoardExpandedScreenDrawerItem(
+        SlideMenuItem(
             title = "Change Background",
             icon = painterResource("ic_baseline_wallpaper_24.xml"),
             onItemClickListener = navigateToChangeBackgroundRoute
         )
 
         // Filter Item
-        TaskBoardExpandedScreenDrawerItem(
+        SlideMenuItem(
             title = "Filter",
             icon = painterResource("ic_baseline_filter_list_24.xml"),
             onItemClickListener = navigateToChangeBackgroundRoute
         )
 
         // Automation Item
-        TaskBoardExpandedScreenDrawerItem(
+        SlideMenuItem(
             title = "Automation",
             icon = painterResource("ic_baseline_automation_icon.xml"),
             onItemClickListener = navigateToChangeBackgroundRoute

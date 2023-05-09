@@ -1,6 +1,6 @@
 package com.jettaskboard.multiplatform.ui.components.zoomable
 
-import androidx.compose.foundation.gestures.awaitFirstDown // ktlint-disable import-ordering
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.awaitTouchSlopOrCancellation
 import androidx.compose.foundation.gestures.calculateCentroid
 import androidx.compose.foundation.gestures.calculateCentroidSize
@@ -10,7 +10,7 @@ import androidx.compose.foundation.gestures.calculateZoom
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.drag
 import androidx.compose.foundation.gestures.forEachGesture
-import androidx.compose.foundation.gestures.transformable // ktlint-disable no-unused-imports
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.offset
@@ -70,35 +70,13 @@ fun Zoomable(
     onSwipeLeft: () -> Unit = {},
     onSwipeRight: () -> Unit = {},
     minimumSwipeDistance: Int = 0,
+    composableCenter: Offset,
+    onComposableCenterShift: (Offset) -> Unit,
     onDoubleTap: ((Offset) -> Unit)? = null,
     content: @Composable (BoxScope.() -> Unit)
 ) {
     var dragOffset by remember { mutableStateOf(Offset.Zero) }
-    var composableCenter by remember { mutableStateOf(Offset.Zero) }
     var transformOffset by remember { mutableStateOf(Offset.Zero) }
-
-    val doubleTapFunction = onDoubleTap ?: {
-        if (zoomableState.scale.value != 1f) {
-            coroutineScope.launch {
-                zoomableState.animateBy(
-                    zoomChange = 1 / zoomableState.scale.value,
-                    panChange = -zoomableState.offset.value,
-                    rotationChange = -zoomableState.rotation.value
-                )
-            }
-            Unit
-        } else {
-            coroutineScope.launch {
-                zoomableState.animateZoomToPosition(
-                    zoomChange = 1.2f,
-                    position = Offset.Zero,
-                    currentComposableCenter = composableCenter
-                )
-                // zoomableState.animateZoomBy(2f)
-            }
-            Unit
-        }
-    }
 
     fun onTransformGesture(
         centroid: Offset,
@@ -148,7 +126,7 @@ fun Zoomable(
         Modifier
             .pointerInput(Unit) {
                 detectTapGestures(
-                    onDoubleTap = doubleTapFunction
+                    onDoubleTap = onDoubleTap
                 )
             }
             .pointerInput(Unit) {
@@ -289,9 +267,10 @@ fun Zoomable(
                             coordinates.size.height.toFloat() / 2
                         )
                     val windowOffset = coordinates.localToWindow(localOffset)
-                    composableCenter =
+                    onComposableCenterShift(
                         coordinates.parentLayoutCoordinates?.windowToLocal(windowOffset)
                             ?: Offset.Zero
+                    )
                 }
         ) {
             content()
