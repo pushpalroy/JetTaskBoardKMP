@@ -11,6 +11,8 @@
       <a href="https://kotlinlang.org/docs/releases.html">
         <img src="https://img.shields.io/badge/Kotlin-1.8.20-blue.svg?color=blue&style=for-the-badge"/>
       </a>
+  </p>
+<p align="left">
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/stargazers">
         <img src="https://img.shields.io/github/stars/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
       </a>
@@ -33,7 +35,11 @@
 
 <img src = "art/board_change_bg.gif" width="100%"/>
 
-### ⚽ Features
+### Add and archive card
+
+<img src = "art/board_add_archive_card.gif" width="100%"/>
+
+### 👾 Features
 
 * Dashboard - View different workspaces
 * Create board/card from dashboard
@@ -42,6 +48,7 @@
 * Board background search feature
 * Add list in Board
 * Add card in Board and quick edit
+* Drag and archive card from list
 
 ### ⚒️ Architecture
 
