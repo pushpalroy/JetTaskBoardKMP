@@ -118,7 +118,8 @@ fun DashboardRoute(
                     navigateToCreateCard,
                     navigateToCreateBoard
                 )
-            }
+            },
+            backgroundColor = MaterialTheme.colors.background
         ) { scaffoldPadding ->
             val permanentNavDrawerWidth by animateDpAsState(
                 targetValue = if (isMenuClickedInExpandedMode) 80.dp else 320.dp,

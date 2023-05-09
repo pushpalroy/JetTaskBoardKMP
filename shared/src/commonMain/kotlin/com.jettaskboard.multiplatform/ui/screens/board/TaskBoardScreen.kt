@@ -30,11 +30,11 @@ import androidx.compose.ui.layout.ContentScale
 import com.jettaskboard.multiplatform.data.util.Constants
 import com.jettaskboard.multiplatform.ui.components.board.Board
 import com.jettaskboard.multiplatform.ui.components.board.menu.slide.SlideMenu
+import com.jettaskboard.multiplatform.ui.components.draganddrop.DragAndDropState
 import com.jettaskboard.multiplatform.ui.components.zoomable.Zoomable
 import com.jettaskboard.multiplatform.ui.components.zoomable.rememberZoomableState
 import com.jettaskboard.multiplatform.ui.components.zoomable.zoomIn
 import com.jettaskboard.multiplatform.ui.components.zoomable.zoomOut
-import com.jettaskboard.multiplatform.ui.screens.board.appBar.TaskBoardAppBar
 import com.jettaskboard.multiplatform.ui.screens.board.fab.TaskBoardZoomOptions
 import com.jettaskboard.multiplatform.ui.theme.DefaultTaskBoardBGColor
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
@@ -58,6 +58,7 @@ fun TaskBoardRoute(
     val lists = remember(viewModel.totalCards) { viewModel.lists }
     val expandedScreenState = viewModel.drawerScreenState.value
 
+    val boardState = remember { DragAndDropState(isExpandedScreen) }
     var boardCenterOffset by remember { mutableStateOf(Offset.Zero) }
     var editModeEnabled by remember { mutableStateOf(false) }
     var saveCardClicked by remember { mutableStateOf(false) }
@@ -81,17 +82,6 @@ fun TaskBoardRoute(
             WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
         ),
         scaffoldState = scaffoldState,
-        topBar = {
-            TaskBoardAppBar(
-                isExpandedScreen = isExpandedScreen,
-                onBackClick = onBackClick,
-                title = viewModel.boardInfo.value.second,
-                navigateToChangeBgScreen = { passedString -> navigateToChangeBgScreen(passedString) },
-                onHamBurgerMenuClick = { expandedPanel = !expandedPanel },
-                onSaveClicked = { saveCardClicked = true },
-                editModeEnabled = editModeEnabled
-            )
-        },
         floatingActionButton = {
             TaskBoardZoomOptions(
                 modifier = Modifier,
@@ -151,9 +141,26 @@ fun TaskBoardRoute(
                         onCardMovedToDifferentList = { cardId, oldListId, newListId ->
                             viewModel.moveCardToDifferentList(cardId, oldListId, newListId)
                         },
+                        boardState = boardState,
                         navigateToCreateCard = navigateToCreateCard,
                         isExpandedScreen = isExpandedScreen,
-                        saveClicked = saveCardClicked
+                        saveClicked = saveCardClicked,
+                        onBackClick = {
+                            if (editModeEnabled) {
+                                editModeEnabled = false
+                            } else {
+                                onBackClick()
+                            }
+                        },
+                        title = viewModel.boardInfo.value.second,
+                        navigateToChangeBgScreen = { passedString ->
+                            navigateToChangeBgScreen(
+                                passedString
+                            )
+                        },
+                        onHamBurgerMenuClick = { expandedPanel = !expandedPanel },
+                        onSaveClicked = { saveCardClicked = true },
+                        editModeEnabled = editModeEnabled
                     )
                 }
 
