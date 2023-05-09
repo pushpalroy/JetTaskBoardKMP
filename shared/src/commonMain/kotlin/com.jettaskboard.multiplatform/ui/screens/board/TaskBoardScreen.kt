@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import com.jettaskboard.multiplatform.data.util.Constants
 import com.jettaskboard.multiplatform.ui.components.board.Board
 import com.jettaskboard.multiplatform.ui.components.board.menu.slide.SlideMenu
@@ -174,7 +175,7 @@ fun TaskBoardRoute(
                         visible = expandedPanel,
                     ) {
                         SlideMenu(
-                            modifier = Modifier,
+                            modifier = Modifier.padding(top = 56.dp),
                             backgroundColor = backgroundColor,
                             expandedScreenState = expandedScreenState,
                             navigateToChangeBackgroundRoute = {
