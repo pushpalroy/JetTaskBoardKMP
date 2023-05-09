@@ -25,9 +25,9 @@
       </a>
   </p>
 
-### Application demo
+### Card drag & drop
 
-<video src="https://user-images.githubusercontent.com/19844292/236077021-fa5c8b68-a9e2-4c82-942c-dc3500b5b7b7.mp4"></video>
+<img src = "art/board_card_move.gif" width="100%"/>
 
 ### ⚽ Features
 
