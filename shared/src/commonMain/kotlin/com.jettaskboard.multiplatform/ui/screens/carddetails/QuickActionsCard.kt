@@ -18,6 +18,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.rounded.Attachment
+import androidx.compose.material.icons.rounded.CheckCircle
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +32,9 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jettaskboard.multiplatform.ui.theme.LabelBlue
+import com.jettaskboard.multiplatform.ui.theme.LabelGreen
+import com.jettaskboard.multiplatform.ui.theme.LabelPeach
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -78,10 +84,10 @@ fun QuickActionsCard(isExpanded: Boolean = false) {
                             .testTag("quick_action_chip"),
                         leadingIcon = {
                             Icon(
-                                imageVector = Icons.Default.CheckCircle,
+                                imageVector = Icons.Rounded.CheckCircle,
                                 contentDescription = "Add Checklist",
                                 Modifier.size(16.dp),
-                                tint = if (isSystemInDarkTheme()) Color.Black else Color.White
+                                tint = LabelGreen
                             )
                         },
                         title = "Add CheckList"
@@ -91,10 +97,10 @@ fun QuickActionsCard(isExpanded: Boolean = false) {
                         modifier = Modifier.weight(1f),
                         leadingIcon = {
                             Icon(
-                                painter = painterResource("ic_attachment.xml"),
+                                imageVector = Icons.Rounded.Attachment,
                                 contentDescription = "Add Attachment",
                                 Modifier.size(16.dp),
-                                tint = if (isSystemInDarkTheme()) Color.Black else Color.White
+                                tint = LabelBlue
                             )
                         },
                         title = "Add Attachment"
@@ -106,10 +112,10 @@ fun QuickActionsCard(isExpanded: Boolean = false) {
                         modifier = Modifier.weight(1f),
                         leadingIcon = {
                             Icon(
-                                imageVector = Icons.Default.Person,
+                                imageVector = Icons.Rounded.Person,
                                 contentDescription = "Add Members",
                                 Modifier.size(16.dp),
-                                tint = if (isSystemInDarkTheme()) Color.Black else Color.White
+                                tint = LabelPeach
                             )
                         },
                         title = "Add Members"

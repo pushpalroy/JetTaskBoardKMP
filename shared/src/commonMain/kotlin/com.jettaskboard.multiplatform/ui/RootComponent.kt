@@ -62,7 +62,7 @@ fun RootComponent(
 
                     is RootStateModel.CardDetails -> CardDetailsRoute(
                         isExpandedScreen = isExpandedScreen,
-                        onCancelClick = {}
+                        onCancelClick = { router.pop() }
                     )
                 }
             }

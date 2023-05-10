@@ -29,6 +29,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun CardDetailsContent(
+    modifier: Modifier = Modifier,
     scrollState: ScrollState,
     cardDetails: CardDetail,
     viewModel: CardViewModel
@@ -52,7 +53,7 @@ fun CardDetailsContent(
 //
 //    val dialogState = rememberMaterialDialogState()
 
-    Column(modifier = Modifier.verticalScroll(scrollState)) {
+    Column(modifier = modifier.verticalScroll(scrollState)) {
         Text(
             modifier = Modifier.padding(16.dp),
             text = cardDetails.title ?: "Backlog",
