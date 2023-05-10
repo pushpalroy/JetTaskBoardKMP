@@ -11,6 +11,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Attachment
+import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -88,7 +90,7 @@ fun CardDetailsContent(
         )
         TimeItemRow(
             modifier = Modifier.testTag("time_item_row"),
-            icon = painterResource("ic_time.xml"),
+            icon = Icons.Default.Timer,
             topText = viewModel.startDateText.value,
             bottomText = viewModel.dueDateText.value,
             onStartDateClick = {
@@ -127,7 +129,7 @@ fun CardDetailsContent(
             leadingIcon = {
                 Icon(
                     modifier = Modifier.padding(16.dp),
-                    painter = painterResource("ic_attachment.xml"),
+                    imageVector = Icons.Default.Attachment,
                     contentDescription = "Leading Icon"
                 )
             },

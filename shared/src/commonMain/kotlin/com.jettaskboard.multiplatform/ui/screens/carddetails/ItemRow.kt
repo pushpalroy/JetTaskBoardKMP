@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Timer
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,7 +60,7 @@ fun ItemRow(
 @Composable
 fun TimeItemRow(
     modifier: Modifier,
-    icon: Painter,
+    icon: ImageVector,
     topText: String,
     bottomText: String,
     showUpperDivider: Boolean = true,
@@ -76,7 +78,7 @@ fun TimeItemRow(
             Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
                 Icon(
                     modifier = Modifier.padding(16.dp),
-                    painter = icon,
+                    imageVector = icon,
                     contentDescription = "Icon"
                 )
                 Column(modifier = Modifier.fillMaxWidth()) {

@@ -17,6 +17,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Label
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +43,7 @@ fun LabelRow(viewModel: CardViewModel) {
         ) {
             Icon(
                 modifier = Modifier.padding(16.dp),
-                painter = painterResource("ic_label.xml"),
+                imageVector = Icons.Default.Label,
                 contentDescription = "Leading Icon"
             )
             if (viewModel.selectedColors.isEmpty()) {
