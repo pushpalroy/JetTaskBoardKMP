@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jetapps.jettaskboard.carddetailscomponents.EditTextCard
 import com.jetapps.jettaskboard.carddetailscomponents.QuickActionsCard
-import org.jetbrains.compose.resources.painterResource
+import com.jettaskboard.multiplatform.util.imageattachment.ImageAttachmentView
 
 @Composable
 fun CardDetailsContent(
@@ -34,25 +34,6 @@ fun CardDetailsContent(
     cardDetails: CardDetail,
     viewModel: CardViewModel
 ) {
-//    val configuration = LocalConfiguration.current
-//
-//    var imageUri: Uri? by remember {
-//        mutableStateOf<Uri?>(null)
-//    }
-//    val context = LocalContext.current
-//
-//    val launcher = rememberLauncherForActivityResult(
-//        contract =
-//        ActivityResultContracts.GetContent()
-//    ) { uri: Uri? ->
-//        imageUri = uri
-//    }
-//
-//    val galleryPermissionStatus =
-//        rememberPermissionState(permission = Manifest.permission.READ_EXTERNAL_STORAGE)
-//
-//    val dialogState = rememberMaterialDialogState()
-
     Column(modifier = modifier.verticalScroll(scrollState)) {
         Text(
             modifier = Modifier.padding(16.dp),
@@ -126,26 +107,9 @@ fun CardDetailsContent(
 //            }
         }
 
-        ItemRow(
-            leadingIcon = {
-                Icon(
-                    modifier = Modifier.padding(16.dp),
-                    imageVector = Icons.Default.Attachment,
-                    contentDescription = "Leading Icon"
-                )
-            },
-            text = "ATTACHMENTS",
-            trailingIcon = Icons.Default.Add,
-            onClick = {
-//                if (galleryPermissionStatus.status != PermissionStatus.Granted) {
-//                    galleryPermissionStatus.launchPermissionRequest()
-//                } else {
-//                    launcher.launch("image/*")
-//                }
-            }
-        )
-
 //        ImageAttachments(viewModel, context, galleryPermissionStatus, imageUri)
+
+        ImageAttachmentView()
 
         Divider()
 

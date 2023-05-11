@@ -36,7 +36,7 @@
 //    viewModel: CardViewModel,
 //    context: Context,
 //    galleryPermissionStatus: PermissionState,
-//    imageUri: Uri?
+//    imageUri: String?
 //) {
 //    when (galleryPermissionStatus.status) {
 //        PermissionStatus.Granted -> {
