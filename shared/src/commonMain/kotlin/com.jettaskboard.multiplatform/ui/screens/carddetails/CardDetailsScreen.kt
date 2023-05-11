@@ -12,8 +12,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.jettaskboard.multiplatform.ui.screens.dashboard.DashboardViewModel
 import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
 import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
@@ -36,13 +34,6 @@ fun CardDetailsRoute(
         val expandedRightScrollState = rememberScrollState()
         Scaffold(
             topBar = {
-//                MotionTopBar(
-//                    scrollState = scrollState,
-//                    isExpandedScreen,
-//                    onCancelClick,
-//                    viewModel.cardModel.value.coverImageUrl,
-//                    viewModel.cardModel.value.title
-//                )
                 CardDetailTopBar(
                     modifier = Modifier.windowInsetsPadding(
                         WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
@@ -55,12 +46,12 @@ fun CardDetailsRoute(
             if (!isExpandedScreen) {
                 CardDetailsContent(Modifier.padding(it),scrollState, CardDetail(), viewModel)
             } else {
-//                ExpandedCardDetailContent(
-//                    expandedLeftScrollState,
-//                    expandedRightScrollState,
-//                    CardDetail(),
-//                    viewModel
-//                )
+                ExpandedCardDetailContent(
+                    expandedLeftScrollState,
+                    expandedRightScrollState,
+                    CardDetail(),
+                    viewModel
+                )
             }
         }
     }
