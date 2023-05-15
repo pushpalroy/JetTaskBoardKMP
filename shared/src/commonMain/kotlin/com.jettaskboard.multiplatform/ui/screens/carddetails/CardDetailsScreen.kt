@@ -34,22 +34,24 @@ fun CardDetailsRoute(
         val expandedRightScrollState = rememberScrollState()
         Scaffold(
             topBar = {
-                CardDetailTopBar(
-                    modifier = Modifier.windowInsetsPadding(
-                        WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
-                    ),
-                    onClose = onCancelClick,
-                    onMenuClick = {}
-                )
+                if (!isExpandedScreen) {
+                    CardDetailTopBar(
+                        modifier = Modifier.windowInsetsPadding(
+                            WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+                        ),
+                        onClose = onCancelClick,
+                        onMenuClick = {}
+                    )
+                }
             }
         ) {
             if (!isExpandedScreen) {
                 CardDetailsContent(Modifier.padding(it),scrollState, CardDetail(), viewModel)
             } else {
-                ExpandedCardDetailContent(
+                DesktopCardDetailsContent(
                     expandedLeftScrollState,
                     expandedRightScrollState,
-                    CardDetail(),
+                    onCancelClick,
                     viewModel
                 )
             }

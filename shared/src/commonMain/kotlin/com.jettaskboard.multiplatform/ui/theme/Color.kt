@@ -72,8 +72,13 @@ val LabelPeach = Color(0xFFFFB968)
 val LabelOrange = Color(0xFFEF7564)
 val LabelViolet = Color(0xE69A8DFF)
 val LabelBlue = Color(0xFF5BA4CF)
+val CardGray = Color(0xFFeaecf0)
 val DefaultTaskBoardBGColor = Color(0xFF0079bf)
 val SecondaryColor = Color(0xFF61bd4f)
+
+val WindowsCardDetailBGColor = Color(0xFFf4f5f7)
+val WindowsCardDetailTextColor = Color(0xFF1e3152)
+val WindowsCardDetailPlaceholderTextColor = Color(0xFF52607b)
 
 val MotionTopBarColor
     @Composable get() =
