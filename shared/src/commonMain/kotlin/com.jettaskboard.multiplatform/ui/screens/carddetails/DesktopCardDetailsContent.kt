@@ -11,15 +11,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Archive
@@ -49,11 +53,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jettaskboard.multiplatform.ui.theme.CardGray
+import com.jettaskboard.multiplatform.ui.theme.LabelBlue
 import com.jettaskboard.multiplatform.ui.theme.WindowsCardDetailBGColor
 import com.jettaskboard.multiplatform.ui.theme.WindowsCardDetailPlaceholderTextColor
 import com.jettaskboard.multiplatform.ui.theme.WindowsCardDetailTextColor
@@ -90,6 +94,8 @@ fun DesktopCardDetailsContent(
 fun LeftPane(leftScrollState: ScrollState) {
 
     var commentText by remember { mutableStateOf("") }
+    var cardDescriptionText by remember { mutableStateOf("Card Details") }
+    var isEditCardDescriptionTextClick by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -158,7 +164,7 @@ fun LeftPane(leftScrollState: ScrollState) {
             ) {
 
                 Row(
-                    verticalAlignment = Alignment.Top
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = "Description",
@@ -167,20 +173,95 @@ fun LeftPane(leftScrollState: ScrollState) {
                         color = WindowsCardDetailTextColor
                     )
 
-                    IconCard(
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp),
-                        cardText = "Edit",
-                        textPaddingValues = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
-                    )
+                    if (isEditCardDescriptionTextClick) {
+                        Icon(
+                            modifier = Modifier
+                                .padding(horizontal = 8.dp)
+                                .size(12.dp),
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = "More info",
+                            tint = WindowsCardDetailTextColor
+                        )
+                    } else {
+                        IconCard(
+                            modifier = Modifier
+                                .padding(horizontal = 8.dp),
+                            cardText = "Edit",
+                            textPaddingValues = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                            onCardClick = {
+                                isEditCardDescriptionTextClick = true
+                            }
+                        )
+                    }
                 }
 
-                Text(
-                    modifier = Modifier.padding(top = 8.dp),
-                    text = "Card Description",
-                    fontSize = 12.sp,
-                    color = WindowsCardDetailTextColor
-                )
+                if(isEditCardDescriptionTextClick) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    ) {
+                        OutlinedTextField(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                                .height(350.dp),
+                            value = cardDescriptionText,
+                            onValueChange = { textFieldValue ->
+                                cardDescriptionText = textFieldValue
+                            },
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                textColor = WindowsCardDetailTextColor,
+                                cursorColor = LabelBlue,
+                                focusedBorderColor = LabelBlue,
+                                unfocusedBorderColor = Color.DarkGray
+                            )
+                        )
+
+                        Row(
+                            modifier = Modifier
+                                .padding(top = 4.dp)
+                                .padding(horizontal = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Button(
+                                content = {
+                                    Text(
+                                        modifier = Modifier
+                                            .padding(vertical = 4.dp, horizontal = 8.dp),
+                                        text = "Save",
+                                        color = Color.White
+                                    )
+                                },
+                                onClick = {
+                                    isEditCardDescriptionTextClick = false
+                                },
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = LabelBlue
+                                )
+                            )
+
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = 16.dp)
+                                    .clickable {
+                                        isEditCardDescriptionTextClick = false
+                                    },
+                                text = "Cancel",
+                                color = WindowsCardDetailTextColor
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        modifier = Modifier
+                            .padding(top = 8.dp)
+                            .clickable { isEditCardDescriptionTextClick = true },
+                        text = cardDescriptionText,
+                        fontSize = 12.sp,
+                        color = WindowsCardDetailTextColor
+                    )
+                }
             }
         }
 
@@ -230,7 +311,7 @@ fun LeftPane(leftScrollState: ScrollState) {
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
-                value = TextFieldValue(commentText),
+                value = commentText,
                 placeholder = {
                     Text(
                         "Write a comment... ",
@@ -238,8 +319,14 @@ fun LeftPane(leftScrollState: ScrollState) {
                     )
                 },
                 onValueChange = { textFieldValue ->
-                    commentText = textFieldValue.text
-                }
+                    commentText = textFieldValue
+                },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    textColor = WindowsCardDetailTextColor,
+                    cursorColor = LabelBlue,
+                    focusedBorderColor = LabelBlue,
+                    unfocusedBorderColor = Color.DarkGray
+                )
             )
         }
     }
@@ -458,11 +545,13 @@ fun IconCard(
     leadingIcon: ImageVector? = null,
     textPaddingValues: PaddingValues,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = CardGray
+    backgroundColor: Color = CardGray,
+    onCardClick: () -> Unit = {}
 ) {
     Card(
-        modifier = modifier,
-        backgroundColor = backgroundColor,
+        modifier = modifier
+            .clickable { onCardClick() },
+        backgroundColor = backgroundColor
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
