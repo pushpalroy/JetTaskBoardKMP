@@ -19,10 +19,14 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LabelCheckBox(color: Color, isSelected: Boolean, onClick: () -> Unit) {
+fun LabelCheckBox(
+    modifier: Modifier = Modifier,
+    color: Color,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
     Card(
-        modifier = Modifier
-            .padding(horizontal = 32.dp, vertical = 8.dp)
+        modifier = modifier
             .selectable(
                 selected = isSelected,
                 onClick = onClick

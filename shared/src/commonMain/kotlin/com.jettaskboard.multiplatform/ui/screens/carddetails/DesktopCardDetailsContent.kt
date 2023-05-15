@@ -1,9 +1,12 @@
 package com.jettaskboard.multiplatform.ui.screens.carddetails
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -14,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -78,24 +82,27 @@ fun DesktopCardDetailsContent(
                 .fillMaxHeight()
                 .weight(1.6f)
         ) {
-            LeftPane(leftScrollState)
+            LeftPane(leftScrollState, viewModel)
         }
         Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .weight(0.4f)
         ) {
-            RightPane(rightScrollState, onBackClick)
+            RightPane(rightScrollState, viewModel, onBackClick)
         }
     }
 }
 
 @Composable
-fun LeftPane(leftScrollState: ScrollState) {
-
+fun LeftPane(
+    leftScrollState: ScrollState,
+    viewModel: CardViewModel
+) {
     var commentText by remember { mutableStateOf("") }
     var cardDescriptionText by remember { mutableStateOf("Card Details") }
     var isEditCardDescriptionTextClick by remember { mutableStateOf(false) }
+//    val selectedColors by viewModel.selectedColors.collectAsState()
 
     Column(
         modifier = Modifier
@@ -131,21 +138,54 @@ fun LeftPane(leftScrollState: ScrollState) {
                     color = WindowsCardDetailTextColor
                 )
 
-                Text(
-                    modifier = Modifier.padding(top = 28.dp),
-                    text = "Notifications",
-                    fontSize = 12.sp,
-                    color = WindowsCardDetailTextColor
-                )
+                Row(
+                    modifier = Modifier.padding(top = 28.dp)
+                ) {
+                    AnimatedVisibility(viewModel.selectedColors.isNotEmpty()) {
+                        Column(
+                            modifier = Modifier.padding(end = 24.dp)
+                        ) {
+                            Text(
+                                text = "Labels",
+                                fontSize = 12.sp,
+                                color = WindowsCardDetailTextColor
+                            )
+                                Row(
+                                    modifier = Modifier
+                                        .padding(top = 8.dp)
+                                        .animateContentSize()
+                                ) {
+                                    viewModel.selectedColors.forEachIndexed { index, color ->
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(start = if (index == 0) 0.dp else 4.dp)
+                                            .height(32.dp)
+                                            .width(48.dp)
+                                            .background(color),
+                                    )
+                                }
 
-                IconCard(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(top = 8.dp),
-                    leadingIcon = Icons.Default.RemoveRedEye,
-                    cardText = "Watch",
-                    textPaddingValues = PaddingValues(end = 16.dp)
-                )
+                            }
+                        }
+                    }
+
+                    Column {
+                        Text(
+                            text = "Notifications",
+                            fontSize = 12.sp,
+                            color = WindowsCardDetailTextColor
+                        )
+
+                        IconCard(
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .padding(top = 8.dp),
+                            leadingIcon = Icons.Default.RemoveRedEye,
+                            cardText = "Watch",
+                            textPaddingValues = PaddingValues(end = 16.dp)
+                        )
+                    }
+                }
             }
         }
 
@@ -195,7 +235,7 @@ fun LeftPane(leftScrollState: ScrollState) {
                     }
                 }
 
-                if(isEditCardDescriptionTextClick) {
+                if (isEditCardDescriptionTextClick) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -335,8 +375,13 @@ fun LeftPane(leftScrollState: ScrollState) {
 @Composable
 fun RightPane(
     rightScrollState: ScrollState,
-    onBackClick: () -> Unit
+    viewModel: CardViewModel,
+    onBackClick: () -> Unit,
 ) {
+
+//    val selectedColors by viewModel.selectedColors.collectAsState()
+//    val isLabelRowClicked by viewModel.isLabelRowClicked.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -382,8 +427,36 @@ fun RightPane(
                 .padding(top = 8.dp),
             leadingIcon = Icons.Default.Label,
             cardText = "Labels",
-            textPaddingValues = PaddingValues(8.dp)
+            textPaddingValues = PaddingValues(8.dp),
+            onCardClick = {
+                viewModel.isLabelRowClicked.value = !viewModel.isLabelRowClicked.value
+            }
         )
+
+        AnimatedVisibility(visible = viewModel.isLabelRowClicked.value) {
+            Column {
+                viewModel.labels.forEach { labelColor ->
+                    LabelCheckBox(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 4.dp),
+                        color = labelColor.color,
+                        isSelected = labelColor.isSelected,
+                        onClick = {
+                            labelColor.isSelected = !labelColor.isSelected
+                            if (labelColor.isSelected && !viewModel.selectedColors.contains(
+                                    labelColor.color
+                                )
+                            ) {
+                                viewModel.selectedColors.add(labelColor.color)
+                            } else if (!labelColor.isSelected) {
+                                viewModel.selectedColors.remove(labelColor.color)
+                            }
+                        }
+                    )
+                }
+            }
+        }
 
         IconCard(
             modifier = Modifier
@@ -467,7 +540,6 @@ fun RightPane(
                 tint = WindowsCardDetailTextColor
             )
         }
-
 
         IconCard(
             modifier = Modifier

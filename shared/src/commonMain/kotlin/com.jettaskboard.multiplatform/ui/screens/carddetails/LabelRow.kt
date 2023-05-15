@@ -18,14 +18,12 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Label
-import androidx.compose.material.icons.filled.Place
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun LabelRow(viewModel: CardViewModel) {
@@ -86,7 +84,9 @@ fun LabelRow(viewModel: CardViewModel) {
                             } else if (!labelColor.isSelected) {
                                 viewModel.selectedColors.remove(labelColor.color)
                             }
-                        }
+                        },
+                        modifier = Modifier
+                            .padding(horizontal = 32.dp, vertical = 8.dp)
                     )
                 }
             }
