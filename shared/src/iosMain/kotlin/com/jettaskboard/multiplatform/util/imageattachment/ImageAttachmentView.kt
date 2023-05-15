@@ -6,20 +6,26 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Attachment
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jettaskboard.multiplatform.ui.screens.carddetails.ItemRow
-
-private sealed interface ImageAccess {
-    object Undefined: ImageAccess
-    object Defined: ImageAccess
-    object Unauthorised: ImageAccess
-}
-
-
+import platform.Foundation.NSCoder
+import platform.UIKit.UIImage
 
 @Composable
 actual fun ImageAttachmentView(modifier: Modifier) {
+    var image by remember { mutableStateOf<UIImage?>(null) }
+
+    val viewController = remember {
+        mutableStateOf(
+            ViewController(NSCoder())
+        )
+    }
+
     ItemRow(
         leadingIcon = {
             Icon(
@@ -31,11 +37,7 @@ actual fun ImageAttachmentView(modifier: Modifier) {
         text = "ATTACHMENTS",
         trailingIcon = Icons.Default.Add,
         onClick = {
-//                if (galleryPermissionStatus.status != PermissionStatus.Granted) {
-//                    galleryPermissionStatus.launchPermissionRequest()
-//                } else {
-//                    launcher.launch("image/*")
-//                }
+            viewController.value.chooseImage()
         }
     )
 }
