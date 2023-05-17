@@ -3,7 +3,6 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.jettaskboard.multiplatform.MainView
-import moe.tlaster.kfilepicker.FilePicker
 
 fun main() = application {
     Window(
@@ -11,7 +10,6 @@ fun main() = application {
         state = rememberWindowState(width = 1200.dp, height = 800.dp),
         onCloseRequest = ::exitApplication,
     ) {
-        FilePicker.init(window)
         MainView()
     }
 }

@@ -31,7 +31,6 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Archive
-import androidx.compose.material.icons.filled.Attachment
 import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.CopyAll
@@ -378,10 +377,6 @@ fun RightPane(
     viewModel: CardViewModel,
     onBackClick: () -> Unit,
 ) {
-
-//    val selectedColors by viewModel.selectedColors.collectAsState()
-//    val isLabelRowClicked by viewModel.isLabelRowClicked.collectAsState()
-
     Column(
         modifier = Modifier
             .fillMaxSize()
