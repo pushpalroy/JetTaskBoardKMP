@@ -65,6 +65,7 @@ import com.jettaskboard.multiplatform.ui.theme.LabelBlue
 import com.jettaskboard.multiplatform.ui.theme.WindowsCardDetailBGColor
 import com.jettaskboard.multiplatform.ui.theme.WindowsCardDetailPlaceholderTextColor
 import com.jettaskboard.multiplatform.ui.theme.WindowsCardDetailTextColor
+import com.jettaskboard.multiplatform.util.imageattachment.ImageAttachmentView
 
 @Composable
 fun DesktopCardDetailsContent(
@@ -102,7 +103,6 @@ fun LeftPane(
     var commentText by remember { mutableStateOf("") }
     var cardDescriptionText by remember { mutableStateOf("Card Details") }
     var isEditCardDescriptionTextClick by remember { mutableStateOf(false) }
-//    val selectedColors by viewModel.selectedColors.collectAsState()
 
     Column(
         modifier = Modifier
@@ -150,12 +150,12 @@ fun LeftPane(
                                 fontSize = 12.sp,
                                 color = WindowsCardDetailTextColor
                             )
-                                Row(
-                                    modifier = Modifier
-                                        .padding(top = 8.dp)
-                                        .animateContentSize()
-                                ) {
-                                    viewModel.selectedColors.forEachIndexed { index, color ->
+                            Row(
+                                modifier = Modifier
+                                    .padding(top = 8.dp)
+                                    .animateContentSize()
+                            ) {
+                                viewModel.selectedColors.forEachIndexed { index, color ->
                                     Box(
                                         modifier = Modifier
                                             .padding(start = if (index == 0) 0.dp else 4.dp)
@@ -476,13 +476,10 @@ fun RightPane(
             textPaddingValues = PaddingValues(8.dp)
         )
 
-        IconCard(
+        ImageAttachmentView(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp),
-            leadingIcon = Icons.Default.Attachment,
-            cardText = "Attachment",
-            textPaddingValues = PaddingValues(8.dp)
+                .padding(top = 8.dp)
         )
 
         IconCard(

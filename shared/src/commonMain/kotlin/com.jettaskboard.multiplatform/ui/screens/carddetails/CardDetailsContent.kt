@@ -78,47 +78,16 @@ fun CardDetailsContent(
             onStartDateClick = {
                 viewModel.isTopText.value = true
                 viewModel.isBottomText.value = false
-//                dialogState.show()
             },
             onDueDateClick = {
                 viewModel.isBottomText.value = true
                 viewModel.isTopText.value = false
-//                dialogState.show()
             }
         ) {
-//            MaterialDialog(
-//                dialogState = dialogState,
-//                buttons = {
-//                    positiveButton("Ok")
-//                    negativeButton("Cancel")
-//                }
-//            ) {
-//                datepicker {
-//                    // Do something with the date
-//                    if (viewModel.isTopText.value) viewModel.startDateText.value =
-//                        "Starts on ${it.dayOfMonth} ${
-//                        (it.month).toString().lowercase()
-//                        }, ${it.year}"
-//                    if (viewModel.isBottomText.value) viewModel.dueDateText.value =
-//                        "Due on ${it.dayOfMonth} ${
-//                        (it.month).toString().lowercase()
-//                        }, ${it.year}"
-//                }
-//            }
         }
-
-//        ImageAttachments(viewModel, context, galleryPermissionStatus, imageUri)
 
         ImageAttachmentView()
 
         Divider()
-
-//        when (configuration.orientation) {
-//            Configuration.ORIENTATION_PORTRAIT -> {
-//                Spacer(modifier = Modifier.height(400.dp))
-//            }
-//            else -> {
-//            }
-//        }
     }
 }
