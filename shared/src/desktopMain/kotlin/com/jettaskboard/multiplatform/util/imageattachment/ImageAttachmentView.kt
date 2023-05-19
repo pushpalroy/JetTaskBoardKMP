@@ -41,7 +41,6 @@ actual fun ImageAttachmentView(modifier: Modifier) {
         filePath = path?.path.orEmpty()
     }
 
-
     Column {
         IconCard(
             modifier = Modifier
