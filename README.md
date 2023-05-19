@@ -20,16 +20,27 @@
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/watchers">
           <img src="https://img.shields.io/github/watchers/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
       </a>
+      <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/pulls">
+         <img src="https://img.shields.io/github/issues-pr/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" alt="Pull Requests Badge"/>
+      </a>
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/issues">
           <img src="https://img.shields.io/github/issues/pushpalroy/JetTaskBoardKMP?color=orange&style=for-the-badge" />
       </a>
   </p>
 
-### Application demo
+### Card drag & drop
 
-<video src="https://user-images.githubusercontent.com/19844292/236077021-fa5c8b68-a9e2-4c82-942c-dc3500b5b7b7.mp4"></video>
+<img src = "art/board_card_move.gif" width="100%"/>
 
-### ⚽ Features
+### Change board background
+
+<img src = "art/board_change_bg.gif" width="100%"/>
+
+### Add and archive card
+
+<img src = "art/board_add_archive_card.gif"/>
+
+### 👾 Features
 
 * Dashboard - View different workspaces
 * Create board/card from dashboard
@@ -38,6 +49,7 @@
 * Board background search feature
 * Add list in Board
 * Add card in Board and quick edit
+* Drag and archive card from list
 
 ### ⚒️ Architecture
 

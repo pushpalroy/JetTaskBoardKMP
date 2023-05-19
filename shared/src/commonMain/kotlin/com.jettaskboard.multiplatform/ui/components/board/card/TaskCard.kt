@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -26,17 +28,15 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jettaskboard.multiplatform.domain.model.CardModel
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
-import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
-import com.jettaskboard.multiplatform.util.insetsx.imePadding
 import org.jetbrains.compose.resources.painterResource
 
-@OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
 fun TaskCard(
     modifier: Modifier = Modifier,
@@ -49,7 +49,7 @@ fun TaskCard(
 ) {
     val editedTitle = remember { mutableStateOf(TextFieldValue()) }
 
-    LaunchedEffect(saveClicked) {
+    LaunchedEffect(saveClicked, editModeEnabled) {
         if (saveClicked && editModeEnabled) {
             cardModel.listId?.let { safeListId ->
                 onEditDone(
@@ -65,11 +65,10 @@ fun TaskCard(
         modifier = modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .clickable {
-                onClick()
-            },
+            .clickable { onClick() },
         shape = RoundedCornerShape(4.dp),
-        backgroundColor = Color(0xFF2c2c2e)
+        elevation = 4.dp,
+        backgroundColor = MaterialTheme.colors.surface
     ) {
         Column(
             modifier = Modifier
@@ -111,7 +110,21 @@ fun TaskCard(
 
                 if (editModeEnabled) {
                     TextField(
-                        modifier = Modifier.imePadding(),
+                        modifier = Modifier,
+                        colors = TextFieldDefaults.textFieldColors(
+                            cursorColor = MaterialTheme.colors.secondary,
+                            focusedIndicatorColor = MaterialTheme.colors.secondary
+                        ),
+                        placeholder = {
+                            Text(
+                                modifier = Modifier,
+                                text = "Card name",
+                                style = TextStyle(
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            )
+                        },
                         value = editedTitle.value,
                         onValueChange = { editedTitle.value = it }
                     )
