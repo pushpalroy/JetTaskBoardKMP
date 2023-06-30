@@ -13,6 +13,7 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.jettaskboard.multiplatform.ui.screens.board.TaskBoardRoute
 import com.jettaskboard.multiplatform.ui.screens.board.changeBg.ChangeBoardBackgroundRoute
+import com.jettaskboard.multiplatform.ui.screens.carddetails.CardDetailsRoute
 import com.jettaskboard.multiplatform.ui.screens.dashboard.DashboardRoute
 import com.jettaskboard.multiplatform.ui.theme.JtbTheme
 import com.jettaskboard.multiplatform.util.krouter.RoutedContent
@@ -45,6 +46,9 @@ fun RootComponent(
                             router.push(RootStateModel.ChangeBackground)
                         },
                         onBackClick = { router.pop() },
+                        navigateToCreateCard = {
+                            router.push(RootStateModel.CardDetails)
+                        },
                         boardBg = boardBg
                     )
 
@@ -54,6 +58,11 @@ fun RootComponent(
                             router.pop()
                         },
                         onBackClick = { router.pop() }
+                    )
+
+                    is RootStateModel.CardDetails -> CardDetailsRoute(
+                        isExpandedScreen = isExpandedScreen,
+                        onCancelClick = { router.pop() }
                     )
                 }
             }
@@ -66,4 +75,6 @@ sealed class RootStateModel : Parcelable {
     object Dashboard : RootStateModel()
     object TaskBoard : RootStateModel()
     object ChangeBackground : RootStateModel()
+
+    object CardDetails: RootStateModel()
 }

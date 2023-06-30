@@ -10,6 +10,7 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(project(":shared"))
+                implementation("com.github.Tlaster.KFilePicker:KFilePicker:1.0.0")
             }
         }
     }

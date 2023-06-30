@@ -51,6 +51,7 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
+                implementation(compose.materialIconsExtended)
                 implementation(compose.ui)
                 implementation(compose("org.jetbrains.compose.ui:ui-util"))
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
@@ -102,6 +103,8 @@ kotlin {
                 implementation(compose.desktop.common)
                 implementation("io.ktor:ktor-client-okhttp:2.3.0")
                 implementation("org.slf4j:slf4j-simple:2.0.7")
+                implementation("com.github.Tlaster.KFilePicker:KFilePicker:1.0.0")
+                implementation("com.darkrockstudios:mpfilepicker:1.1.0")
             }
         }
     }
