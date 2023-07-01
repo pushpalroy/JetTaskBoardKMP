@@ -39,9 +39,9 @@ import com.jettaskboard.multiplatform.ui.components.zoomable.zoomOut
 import com.jettaskboard.multiplatform.ui.screens.board.fab.TaskBoardZoomOptions
 import com.jettaskboard.multiplatform.ui.theme.DefaultTaskBoardBGColor
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
-import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
-import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
+import com.moriatsushi.insetsx.ExperimentalSoftwareKeyboardApi
+import com.moriatsushi.insetsx.safeDrawing
 
 @OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable

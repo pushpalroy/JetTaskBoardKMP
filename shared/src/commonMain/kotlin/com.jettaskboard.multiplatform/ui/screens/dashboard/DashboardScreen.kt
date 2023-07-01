@@ -45,9 +45,9 @@ import com.jettaskboard.multiplatform.ui.components.multifab.MultiFloatingAction
 import com.jettaskboard.multiplatform.ui.screens.dashboard.content.DashboardSinglePaneContent
 import com.jettaskboard.multiplatform.ui.screens.dashboard.content.DashboardTwoPaneContent
 import com.jettaskboard.multiplatform.ui.screens.dashboard.drawer.JtbDrawer
-import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
-import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
+import com.moriatsushi.insetsx.ExperimentalSoftwareKeyboardApi
+import com.moriatsushi.insetsx.safeDrawing
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSoftwareKeyboardApi::class)

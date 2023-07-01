@@ -70,6 +70,7 @@ kotlin {
                 implementation("io.github.aakira:napier:2.6.1")
                 implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0")
                 implementation("com.russhwolf:multiplatform-settings-coroutines:1.0.0")
+                implementation("com.moriatsushi.insetsx:insetsx:0.1.0-alpha10")
             }
         }
 

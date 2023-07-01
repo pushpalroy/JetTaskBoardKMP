@@ -12,9 +12,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
-import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
+import com.moriatsushi.insetsx.ExperimentalSoftwareKeyboardApi
+import com.moriatsushi.insetsx.safeDrawing
 
 @OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
@@ -46,7 +46,7 @@ fun CardDetailsRoute(
             }
         ) {
             if (!isExpandedScreen) {
-                CardDetailsContent(Modifier.padding(it),scrollState, CardDetail(), viewModel)
+                CardDetailsContent(Modifier.padding(it), scrollState, CardDetail(), viewModel)
             } else {
                 DesktopCardDetailsContent(
                     expandedLeftScrollState,

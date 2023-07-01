@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import com.jettaskboard.multiplatform.data.util.UnsplashCollection
 import com.jettaskboard.multiplatform.ui.components.search.SearchComponent
 import com.jettaskboard.multiplatform.ui.util.UIState
-import com.jettaskboard.multiplatform.util.insetsx.ExperimentalSoftwareKeyboardApi
-import com.jettaskboard.multiplatform.util.insetsx.safeDrawing
 import com.jettaskboard.multiplatform.util.krouter.rememberViewModel
+import com.moriatsushi.insetsx.ExperimentalSoftwareKeyboardApi
+import com.moriatsushi.insetsx.safeDrawing
 
 @OptIn(ExperimentalSoftwareKeyboardApi::class)
 @Composable
