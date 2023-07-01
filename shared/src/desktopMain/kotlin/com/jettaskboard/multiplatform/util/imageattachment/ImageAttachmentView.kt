@@ -22,8 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.darkrockstudios.libraries.mpfilepicker.FilePicker
 import com.jettaskboard.multiplatform.ui.screens.carddetails.IconCard
 import com.jettaskboard.multiplatform.util.asyncimage.AsyncImage
-import kotlinx.coroutines.launch
-import moe.tlaster.kfilepicker.FilePicker
 import moe.tlaster.kfilepicker.PlatformFile
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -36,7 +34,7 @@ actual fun ImageAttachmentView(modifier: Modifier) {
     var showFilePicker by remember { mutableStateOf(false) }
 
     val fileTypes = listOf("jpg", "png")
-    FilePicker(showFilePicker, initialDirectory = null ,fileExtensions = fileTypes) { path ->
+    FilePicker(showFilePicker, initialDirectory = null, fileExtensions = fileTypes) { path ->
         showFilePicker = false
         filePath = path?.path.orEmpty()
     }

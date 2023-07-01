@@ -20,18 +20,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Attachment
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import com.jettaskboard.multiplatform.ui.screens.carddetails.ItemRow
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -41,14 +36,15 @@ actual fun ImageAttachmentView(modifier: Modifier) {
     val imageAttachmentList = remember { mutableStateListOf<Uri>() }
     val context = LocalContext.current
 
-    val pickMedia = rememberLauncherForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { imagesUri ->
-        if (imagesUri != null) {
-            Log.d("PhotoPicker", "Selected URI: $imagesUri")
-            imageAttachmentList.addAll(imagesUri)
-        } else {
-            Log.d("PhotoPicker", "No media selected")
+    val pickMedia =
+        rememberLauncherForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { imagesUri ->
+            if (imagesUri != null) {
+                Log.d("PhotoPicker", "Selected URI: $imagesUri")
+                imageAttachmentList.addAll(imagesUri)
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
         }
-    }
 
     ItemRow(
         leadingIcon = {
