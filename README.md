@@ -144,6 +144,10 @@ The `androidApp` module depends on and uses the `shared` module as a regular And
 This is an Xcode project that builds into an iOS application.
 It depends on and uses the `shared` module as a CocoaPods dependency.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=pushpalroy/JetTaskBoardKMP)](https://star-history.com/#pushpalroy/JetTaskBoardKMP)
+
 ## Run your application
 
 ### On Android
