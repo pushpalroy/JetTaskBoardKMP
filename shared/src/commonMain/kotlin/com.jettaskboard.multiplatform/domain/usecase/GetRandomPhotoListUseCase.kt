@@ -5,7 +5,7 @@ import com.jettaskboard.multiplatform.domain.model.ChangeBackgroundPhotoModel
 import com.jettaskboard.multiplatform.domain.repo.PhotoRepo
 import com.jettaskboard.multiplatform.util.Result
 
-class GetRandomPhotoListUseCase constructor(
+class GetRandomPhotoListUseCase(
     private val photoRepo: PhotoRepo
 ) : UseCase<Result<List<ChangeBackgroundPhotoModel>>, Int> {
     suspend operator fun invoke(collectionId: Int) =

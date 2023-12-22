@@ -5,7 +5,7 @@ import com.jettaskboard.multiplatform.domain.model.ChangeBackgroundPhotoModel
 import com.jettaskboard.multiplatform.domain.repo.PhotoRepo
 import com.jettaskboard.multiplatform.util.Result
 
-class SearchPhotoListUseCase constructor(
+class SearchPhotoListUseCase(
     private val photoRepo: PhotoRepo
 ) : UseCase<ChangeBackgroundPhotoModel, String> {
 

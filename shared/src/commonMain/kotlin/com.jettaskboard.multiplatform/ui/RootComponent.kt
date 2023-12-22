@@ -72,9 +72,9 @@ fun RootComponent(
 
 @Parcelize
 sealed class RootStateModel : Parcelable {
-    object Dashboard : RootStateModel()
-    object TaskBoard : RootStateModel()
-    object ChangeBackground : RootStateModel()
+    data object Dashboard : RootStateModel()
+    data object TaskBoard : RootStateModel()
+    data object ChangeBackground : RootStateModel()
 
-    object CardDetails: RootStateModel()
+    data object CardDetails: RootStateModel()
 }
