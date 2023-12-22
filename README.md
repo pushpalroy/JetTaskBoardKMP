@@ -6,10 +6,10 @@
 
   <p align="left">
       <a href = "https://github.com/JetBrains/compose-multiplatform/releases">
-        <img src = "https://img.shields.io/badge/Compose%20Multiplatform-1.4.0-blue.svg?color=blue&style=for-the-badge" />
+        <img src = "https://img.shields.io/badge/Compose%20Multiplatform-1.5.11-blue.svg?color=blue&style=for-the-badge" />
       </a>
       <a href="https://kotlinlang.org/docs/releases.html">
-        <img src="https://img.shields.io/badge/Kotlin-1.8.20-blue.svg?color=blue&style=for-the-badge"/>
+        <img src="https://img.shields.io/badge/Kotlin-1.9.21-blue.svg?color=blue&style=for-the-badge"/>
       </a>
       <a href = "https://github.com/pushpalroy/JetTaskBoardKMP/stargazers">
         <img src="https://img.shields.io/github/stars/pushpalroy/JetTaskBoardKMP?color=yellowgreen&style=for-the-badge" />
