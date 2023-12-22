@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.compose
 
 plugins {
@@ -61,14 +60,14 @@ kotlin {
                 implementation(libs.essenty.parcelable)
                 api(libs.decompose)
                 implementation(libs.decompose.compose.multiplatform)
-                implementation("io.ktor:ktor-client-core:2.3.0")
-                implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
-                implementation("io.ktor:ktor-client-logging:2.2.1")
-                implementation("io.github.aakira:napier:2.6.1")
-                implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0")
-                implementation("com.russhwolf:multiplatform-settings-coroutines:1.0.0")
-                implementation("com.moriatsushi.insetsx:insetsx:0.1.0-alpha10")
+                implementation(libs.ktor.client.core.v230)
+                implementation(libs.ktor.client.content.negotiation.v230)
+                implementation(libs.ktor.serialization.kotlinx.json.v230)
+                implementation(libs.ktor.client.logging)
+                implementation(libs.napier)
+                implementation(libs.multiplatform.settings.no.arg)
+                implementation(libs.multiplatform.settings.coroutines)
+                implementation(libs.insetsx)
             }
         }
 
@@ -100,10 +99,10 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
-                implementation("io.ktor:ktor-client-okhttp:2.3.0")
-                implementation("org.slf4j:slf4j-simple:2.0.7")
+                implementation(libs.ktor.client.okhttp.v230)
+                implementation(libs.slf4j.simple)
                 implementation("com.github.Tlaster.KFilePicker:KFilePicker:1.0.0")
-                implementation("com.darkrockstudios:mpfilepicker:1.1.0")
+                implementation(libs.mpfilepicker)
             }
         }
     }

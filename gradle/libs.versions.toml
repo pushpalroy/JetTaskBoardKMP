@@ -1,5 +1,6 @@
 [versions]
 
+insetsx = "0.1.0-alpha10"
 kotlin = "1.9.21"
 agp = "8.2.0"
 compose = "1.5.11"
@@ -12,9 +13,17 @@ kotlinx-datetime = "0.4.0"
 koin = "3.5.0"
 ktor = "2.3.7"
 coil = "2.4.0"
-decompose = "2.0.0-alpha-02"
 essenty = "1.1.0"
 decompose-compose-experimental = "2.0.0-compose-experimental-alpha-02"
+ktorClientContentNegotiation = "2.3.0"
+ktorClientCore = "2.3.0"
+ktorClientLogging = "2.3.2"
+ktorClientOkhttp = "2.3.0"
+ktorSerializationKotlinxJson = "2.3.0"
+mpfilepicker = "1.1.0"
+multiplatformSettingsNoArg = "1.0.0"
+napier = "2.6.1"
+slf4jSimple = "2.0.7"
 
 [libraries]
 
@@ -23,6 +32,7 @@ androidx-activityCompose = { module = "androidx.activity:activity-compose", vers
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
 compose-ui-util = { module = "org.jetbrains.compose.ui:ui-util", version.ref = "compose" }
 
+insetsx = { module = "com.moriatsushi.insetsx:insetsx", version.ref = "insetsx" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 
@@ -37,13 +47,23 @@ decompose-compose-multiplatform = { module = "com.arkivanov.decompose:extensions
 decompose_extensions = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose-compose-experimental" }
 essenty_parcelable = {module = "com.arkivanov.essenty:parcelable", version.ref = "essenty"}
 
+ktor-client-content-negotiation-v230 = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-core-v230 = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-okhttp-v230 = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClientOkhttp" }
 ktor-client-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+ktor-serialization-kotlinx-json-v230 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+mpfilepicker = { module = "com.darkrockstudios:mpfilepicker", version.ref = "mpfilepicker" }
+multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettingsNoArg" }
+multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettingsNoArg" }
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 
 [plugins]
 
