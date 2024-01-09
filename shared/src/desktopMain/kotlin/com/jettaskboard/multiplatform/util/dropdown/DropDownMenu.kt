@@ -13,6 +13,8 @@ actual fun JDropdownMenu(
     content: @Composable () -> Unit
 ) {
     // Not needed for desktop
+    // todo - implementation
+    // Not available in Desktop yet: https://stackoverflow.com/questions/71897962/in-compose-multiplatform-dropdownmenu-is-not-available-in-commonmain
 }
 
 @Composable

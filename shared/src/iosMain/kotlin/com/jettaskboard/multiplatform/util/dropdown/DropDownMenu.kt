@@ -1,5 +1,7 @@
 package com.jettaskboard.multiplatform.util.dropdown
 
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpOffset
@@ -12,8 +14,12 @@ actual fun JDropdownMenu(
     offset: DpOffset,
     content: @Composable () -> Unit
 ) {
-    // todo - implementation
-    // Not available in IOS yet: https://stackoverflow.com/questions/71897962/in-compose-multiplatform-dropdownmenu-is-not-available-in-commonmain
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = onDismissRequest
+    ) {
+        content()
+    }
 }
 
 @Composable
@@ -22,6 +28,7 @@ actual fun JDropdownMenuItem(
     onSelect: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    // todo - implementation
-    // // Not available in IOS yet
+    DropdownMenuItem(onClick = onSelect) {
+        content()
+    }
 }

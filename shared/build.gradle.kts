@@ -3,7 +3,7 @@ import org.jetbrains.compose.compose
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    kotlin("plugin.serialization").version("1.8.20")
+    alias(libs.plugins.kotlinx.serialization)
     id("com.android.library")
     id("org.jetbrains.compose")
     id("kotlin-parcelize")
@@ -62,7 +62,7 @@ kotlin {
                 implementation(libs.decompose.compose.multiplatform)
                 implementation(libs.ktor.client.core.v230)
                 implementation(libs.ktor.client.content.negotiation.v230)
-                implementation(libs.ktor.serialization.kotlinx.json.v230)
+                implementation(libs.ktor.client.serialization.json)
                 implementation(libs.ktor.client.logging)
                 implementation(libs.napier)
                 implementation(libs.multiplatform.settings.no.arg)
