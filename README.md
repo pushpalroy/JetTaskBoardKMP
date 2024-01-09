@@ -144,6 +144,11 @@ The `androidApp` module depends on and uses the `shared` module as a regular And
 This is an Xcode project that builds into an iOS application.
 It depends on and uses the `shared` module as a CocoaPods dependency.
 
+## How to get started
+
+In `local.properties` file:
+Generate the API key from [Unsplash API](https://unsplash.com/developers), place the key as `unsplash_api_token=<YOUR_API_KEY_HERE>`.
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pushpalroy/JetTaskBoardKMP)](https://star-history.com/#pushpalroy/JetTaskBoardKMP)

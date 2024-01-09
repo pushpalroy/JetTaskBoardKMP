@@ -1,6 +1,7 @@
 [versions]
 
 insetsx = "0.1.0-alpha10"
+kfile-picker = "1.0.0"
 kotlin = "1.9.21"
 agp = "8.2.0"
 compose = "1.5.11"
@@ -19,11 +20,11 @@ ktorClientContentNegotiation = "2.3.0"
 ktorClientCore = "2.3.0"
 ktorClientLogging = "2.3.2"
 ktorClientOkhttp = "2.3.0"
-ktorSerializationKotlinxJson = "2.3.0"
 mpfilepicker = "1.1.0"
 multiplatformSettingsNoArg = "1.0.0"
 napier = "2.6.1"
 slf4jSimple = "2.0.7"
+buildkonfig = "0.15.1"
 
 [libraries]
 
@@ -33,6 +34,7 @@ compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "
 compose-ui-util = { module = "org.jetbrains.compose.ui:ui-util", version.ref = "compose" }
 
 insetsx = { module = "com.moriatsushi.insetsx:insetsx", version.ref = "insetsx" }
+desktop-kfile-picker = { module = "com.github.Tlaster.KFilePicker:KFilePicker", version.ref = "kfile-picker" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 
@@ -66,8 +68,10 @@ slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" 
 
 [plugins]
 
-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 android-application = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }

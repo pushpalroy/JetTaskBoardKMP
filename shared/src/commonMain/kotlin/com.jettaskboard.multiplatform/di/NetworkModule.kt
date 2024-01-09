@@ -1,5 +1,6 @@
 package com.jettaskboard.multiplatform.di
 
+import com.jettaskboard.multiplatform.BuildKonfig
 import com.jettaskboard.multiplatform.data.util.Constants
 import com.jettaskboard.multiplatform.util.logger.initLogger
 import io.github.aakira.napier.Napier
@@ -43,7 +44,7 @@ val networkModule = module {
                 url {
                     url(Constants.BASE_URL)
                     protocol = URLProtocol.HTTPS
-                    parameters.append(Constants.PARAM_AUTH_CLIENT_ID, Constants.CLIENT_ID)
+                    parameters.append(Constants.PARAM_AUTH_CLIENT_ID, BuildKonfig.UNSPLASH_API_TOKEN)
                 }
             }
         }

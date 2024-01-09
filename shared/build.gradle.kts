@@ -1,10 +1,13 @@
 import org.jetbrains.compose.compose
+import java.util.Properties
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     alias(libs.plugins.kotlinx.serialization)
-    id("com.android.library")
+    alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.androidLibrary)
     id("org.jetbrains.compose")
     id("kotlin-parcelize")
 }
@@ -101,7 +104,7 @@ kotlin {
                 implementation(compose.desktop.common)
                 implementation(libs.ktor.client.okhttp.v230)
                 implementation(libs.slf4j.simple)
-                implementation("com.github.Tlaster.KFilePicker:KFilePicker:1.0.0")
+                implementation(libs.desktop.kfile.picker)
                 implementation(libs.mpfilepicker)
             }
         }
@@ -114,7 +117,6 @@ android {
 
     defaultConfig {
         minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
     }
     sourceSets["main"].apply {
         manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -127,5 +129,25 @@ android {
     }
     kotlin {
         jvmToolchain(11)
+    }
+}
+
+val localProperties = Properties()
+localProperties.load(rootProject.file("local.properties").reader())
+
+buildkonfig {
+    packageName = "com.jettaskboard.multiplatform"
+    val props = Properties()
+    try {
+        props.load(file("../local.properties").inputStream())
+    } catch (e: Exception) {
+    }
+
+    defaultConfigs {
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "UNSPLASH_API_TOKEN",
+            props["unsplash_api_token"]?.toString() ?: ""
+        )
     }
 }
