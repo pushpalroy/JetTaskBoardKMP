@@ -2,7 +2,7 @@
 
 insetsx = "0.1.0-alpha10"
 kfile-picker = "1.0.0"
-kotlin = "1.9.21"
+kotlin = "1.9.25"
 agp = "8.2.0"
 compose = "1.5.11"
 androidx-appcompat = "1.6.1"
