@@ -23,7 +23,7 @@ ktorClientOkhttp = "2.3.0"
 mpfilepicker = "1.1.0"
 multiplatformSettingsNoArg = "1.0.0"
 napier = "2.6.1"
-slf4jSimple = "2.0.7"
+slf4jSimple = "2.0.16"
 buildkonfig = "0.15.1"
 
 [libraries]
